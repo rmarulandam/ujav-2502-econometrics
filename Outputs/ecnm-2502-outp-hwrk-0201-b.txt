@@ -29,6 +29,7 @@
 >         unstack ///
 >     booktabs ///
 >     title("Distribution by Race") ///
+>         substitute("\caption{Distribution by Race}" "\caption{Distribution by Race}\label{tab:0201-nonwhite_frequency}") ///
 >     addnote("Frequency and percentage shown")   
 (output written to C:\repos\ujav-2502-econometrics\Tables\0201-nonwhite_frequency.tex)
 
@@ -60,6 +61,7 @@
 >     unstack ///
 >     booktabs ///
 >     title("Distribution by Gender") ///
+>         substitute("\caption{Distribution by Gender}" "\caption{Distribution by Gender}\label{tab:0201-female_frequency}") ///
 >     addnote("Frequency and percentage shown")
 (output written to C:\repos\ujav-2502-econometrics\Tables/0201-female_frequency.tex)
 
@@ -91,6 +93,7 @@
 >     unstack ///
 >     booktabs ///
 >     title("Distribution by Marital Status") ///
+>         substitute("\caption{Distribution by Marital Status}" "\caption{Distribution by Marital Status}\label{tab:0201-married_frequency}") ///
 >     addnote("Frequency and percentage shown")
 (output written to C:\repos\ujav-2502-econometrics\Tables/0201-married_frequency.tex)
 
@@ -152,6 +155,7 @@ Total        |
 >     booktabs ///
 >     title("Descriptive Statistics by Race") ///
 >     mtitles("White" "Non-White") ///
+>         substitute("\caption{Descriptive Statistics by Race}" "\caption{Descriptive Statistics by Race}\label{tab:0201-descriptives_by_race}") ///
 >     addnote("Standard deviations shown below means")
 (output written to C:\repos\ujav-2502-econometrics\Tables/0201-descriptives_by_race.tex)
 
@@ -213,6 +217,8 @@ Total        |
 >     booktabs ///
 >     title("Descriptive Statistics by Gender") ///
 >     mtitles("Male" "Female") ///
+>         substitute("\caption{Descriptive Statistics by Gender}" "\caption{Descriptive Statistics by Gender}\label{tab:0201-descriptives_by_gender}") ///  
+>   
 >     addnote("Standard deviations shown below means")
 (output written to C:\repos\ujav-2502-econometrics\Tables/0201-descriptives_by_gender.tex)
 
@@ -274,6 +280,8 @@ Total        |
 >     booktabs ///
 >     title("Descriptive Statistics by Marital Status") ///
 >     mtitles("Single" "Married") ///
+>         substitute("\caption{Descriptive Statistics by Marital Status}" "\caption{Descriptive Statistics by Marital Status}\label{tab:0201-descriptives_by
+> _marital}") ///
 >     addnote("Standard deviations shown below means")
 (output written to C:\repos\ujav-2502-econometrics\Tables/0201-descriptives_by_marital.tex)
 
@@ -340,6 +348,7 @@ Total        |
 >     cell(b(fmt(0))) ///
 >     booktabs ///
 >     title("Cross-tabulation: Race by Gender") ///
+>         substitute("\caption{Cross-tabulation: Race by Gender}" "\caption{Cross-tabulation: Race by Gender}\label{tab:0201-crosstab_race_gender}") ///
 >     addnote("Cell frequencies shown")
 (output written to C:\repos\ujav-2502-econometrics\Tables/0201-crosstab_race_gender.tex)
 
@@ -402,6 +411,8 @@ Total        |
 >     cell(b(fmt(0))) ///
 >     booktabs ///
 >     title("Cross-tabulation: Race by Marital Status") ///
+>         substitute("\caption{Cross-tabulation: Race by Marital Status}" "\caption{Cross-tabulation: Race by Marital Status}\label{tab:0201-crosstab_race_m
+> arried}") ///
 >     addnote("Cell frequencies shown")
 (output written to C:\repos\ujav-2502-econometrics\Tables/0201-crosstab_race_married.tex)
 
@@ -464,6 +475,8 @@ Total        |
 >     cell(b(fmt(0))) ///
 >     booktabs ///
 >     title("Cross-tabulation: Gender by Marital Status") ///
+>         substitute("\caption{Cross-tabulation: Gender by Marital Status}" "\caption{Cross-tabulation: Gender by Marital Status}\label{tab:0201-crosstab_ge
+> nder_married}") ///
 >     addnote("Cell frequencies shown")
 (output written to C:\repos\ujav-2502-econometrics\Tables/0201-crosstab_gender_married.tex)
 
@@ -521,6 +534,7 @@ Summary statistics: mean count
 >     cells("mean(fmt(3)) count(fmt(0))") ///
 >     booktabs ///
 >     title("Summary of Categorical Variables") ///
+>         substitute("\caption{Summary of Categorical Variables}" "\caption{Summary of Categorical Variables}\label{tab:0201-categorical_summary}") ///
 >     addnote("Proportions and sample sizes shown")
 (output written to C:\repos\ujav-2502-econometrics\Tables/0201-categorical_summary.tex)
 

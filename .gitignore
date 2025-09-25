@@ -1,2 +1,7 @@
 *.do.stswp
 *.stswp
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.synctex.gz

@@ -101,6 +101,7 @@ esttab using "$tables_dir\0201-nonwhite_frequency.tex", replace ///
 	unstack ///
     booktabs ///
     title("Distribution by Race") ///
+	substitute("\caption{Distribution by Race}" "\caption{Distribution by Race}\label{tab:0201-nonwhite_frequency}") ///
     addnote("Frequency and percentage shown")	
 	
 * Tabulate female variable
@@ -108,11 +109,12 @@ tabulate female
 
 * Export female tabulation to LaTeX
 estpost tabulate female
-esttab using "`tables_dir'/0201-female_frequency.tex", replace ///
+esttab using "$tables_dir/0201-female_frequency.tex", replace ///
     cell(b(fmt(0)) pct(fmt(1))) ///
     unstack ///
     booktabs ///
     title("Distribution by Gender") ///
+	substitute("\caption{Distribution by Gender}" "\caption{Distribution by Gender}\label{tab:0201-female_frequency}") ///
     addnote("Frequency and percentage shown")
 
 * Tabulate married variable
@@ -120,11 +122,12 @@ tabulate married
 
 * Export married tabulation to LaTeX
 estpost tabulate married
-esttab using "`tables_dir'/0201-married_frequency.tex", replace ///
+esttab using "$tables_dir/0201-married_frequency.tex", replace ///
     cell(b(fmt(0)) pct(fmt(1))) ///
     unstack ///
     booktabs ///
     title("Distribution by Marital Status") ///
+	substitute("\caption{Distribution by Marital Status}" "\caption{Distribution by Marital Status}\label{tab:0201-married_frequency}") ///
     addnote("Frequency and percentage shown")
 
 * Descriptive statistics by nonwhite status
@@ -132,11 +135,12 @@ bysort nonwhite: summarize wage educ exper tenure
 
 * Create formatted table of means by race
 estpost tabstat wage educ exper tenure, by(nonwhite) statistics(mean sd count) columns(statistics)
-esttab using "`tables_dir'/0201-descriptives_by_race.tex", replace ///
+esttab using "$tables_dir/0201-descriptives_by_race.tex", replace ///
     cells("mean(fmt(2)) sd(fmt(2)) count(fmt(0))") ///
     booktabs ///
     title("Descriptive Statistics by Race") ///
     mtitles("White" "Non-White") ///
+	substitute("\caption{Descriptive Statistics by Race}" "\caption{Descriptive Statistics by Race}\label{tab:0201-descriptives_by_race}") ///
     addnote("Standard deviations shown below means")
 
 * Descriptive statistics by gender
@@ -144,11 +148,12 @@ bysort female: summarize wage educ exper tenure
 
 * Create formatted table of means by gender
 estpost tabstat wage educ exper tenure, by(female) statistics(mean sd count) columns(statistics)
-esttab using "`tables_dir'/0201-descriptives_by_gender.tex", replace ///
+esttab using "$tables_dir/0201-descriptives_by_gender.tex", replace ///
     cells("mean(fmt(2)) sd(fmt(2)) count(fmt(0))") ///
     booktabs ///
     title("Descriptive Statistics by Gender") ///
     mtitles("Male" "Female") ///
+	substitute("\caption{Descriptive Statistics by Gender}" "\caption{Descriptive Statistics by Gender}\label{tab:0201-descriptives_by_gender}") ///    
     addnote("Standard deviations shown below means")
 
 * Descriptive statistics by marital status
@@ -156,11 +161,12 @@ bysort married: summarize wage educ exper tenure
 
 * Create formatted table of means by marital status
 estpost tabstat wage educ exper tenure, by(married) statistics(mean sd count) columns(statistics)
-esttab using "`tables_dir'/0201-descriptives_by_marital.tex", replace ///
+esttab using "$tables_dir/0201-descriptives_by_marital.tex", replace ///
     cells("mean(fmt(2)) sd(fmt(2)) count(fmt(0))") ///
     booktabs ///
     title("Descriptive Statistics by Marital Status") ///
     mtitles("Single" "Married") ///
+	substitute("\caption{Descriptive Statistics by Marital Status}" "\caption{Descriptive Statistics by Marital Status}\label{tab:0201-descriptives_by_marital}") ///
     addnote("Standard deviations shown below means")
 
 * =================================================================
@@ -172,10 +178,11 @@ tab2 nonwhite female, row column cell
 
 * Export cross-tabulation to LaTeX
 estpost tabulate nonwhite female
-esttab using "`tables_dir'/0201-crosstab_race_gender.tex", replace ///
+esttab using "$tables_dir/0201-crosstab_race_gender.tex", replace ///
     cell(b(fmt(0))) ///
     booktabs ///
     title("Cross-tabulation: Race by Gender") ///
+	substitute("\caption{Cross-tabulation: Race by Gender}" "\caption{Cross-tabulation: Race by Gender}\label{tab:0201-crosstab_race_gender}") ///
     addnote("Cell frequencies shown")
 
 * Cross-tabulation: race and marital status
@@ -183,10 +190,11 @@ tab2 nonwhite married, row column cell
 
 * Export to LaTeX
 estpost tabulate nonwhite married
-esttab using "`tables_dir'/0201-crosstab_race_married.tex", replace ///
+esttab using "$tables_dir/0201-crosstab_race_married.tex", replace ///
     cell(b(fmt(0))) ///
     booktabs ///
     title("Cross-tabulation: Race by Marital Status") ///
+	substitute("\caption{Cross-tabulation: Race by Marital Status}" "\caption{Cross-tabulation: Race by Marital Status}\label{tab:0201-crosstab_race_married}") ///
     addnote("Cell frequencies shown")
 
 * Cross-tabulation: gender and marital status  
@@ -194,10 +202,11 @@ tab2 female married, row column cell
 
 * Export to LaTeX
 estpost tabulate female married
-esttab using "`tables_dir'/0201-crosstab_gender_married.tex", replace ///
+esttab using "$tables_dir/0201-crosstab_gender_married.tex", replace ///
     cell(b(fmt(0))) ///
     booktabs ///
     title("Cross-tabulation: Gender by Marital Status") ///
+	substitute("\caption{Cross-tabulation: Gender by Marital Status}" "\caption{Cross-tabulation: Gender by Marital Status}\label{tab:0201-crosstab_gender_married}") ///
     addnote("Cell frequencies shown")
 
 * =================================================================
@@ -214,10 +223,11 @@ table nonwhite female married, statistic(frequency)
 
 * Create a comprehensive summary of all categorical variables
 estpost tabstat nonwhite female married, statistics(mean count) columns(statistics)
-esttab using "`tables_dir'/0201-categorical_summary.tex", replace ///
+esttab using "$tables_dir/0201-categorical_summary.tex", replace ///
     cells("mean(fmt(3)) count(fmt(0))") ///
     booktabs ///
     title("Summary of Categorical Variables") ///
+	substitute("\caption{Summary of Categorical Variables}" "\caption{Summary of Categorical Variables}\label{tab:0201-categorical_summary}") ///
     addnote("Proportions and sample sizes shown")
 
 ********************************************************************************
