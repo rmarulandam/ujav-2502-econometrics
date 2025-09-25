@@ -8,15 +8,14 @@
 *******************************************************************************/
 
 * --- 1. SETUP ---
-* Clear any previous session and set Stata to not pause on long outputs
-clear all
-set more off
 
-cd "C:\repos\Econometrics\hwrk-0204" 
+clear all
+
+cd "C:\repos\ujav-2502-econometrics\Data" 
 
 * --- 2. LOAD AND PREPARE DATA ---
 
-use "capm4.dta", clear
+use "ecnm-2502-hwrk-0204.dta", clear /// equivalent to "cpmn4.dta"
 
 * See the data and variable names after loading
 describe
