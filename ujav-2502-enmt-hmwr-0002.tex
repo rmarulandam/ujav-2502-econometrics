@@ -49,88 +49,142 @@ Descargue la base de datos \texttt{wage1}.
     \item Calcule la covarianza y la correlación entre \texttt{wage}, \texttt{educ}, \texttt{exper}, \texttt{tenure} y \texttt{numdep}.
 \end{enumerate}
 
-\section{Análisis de Estadísticas Descriptivas y Distribuciones de Frecuencia}
+\subsection*{a) Estadísticas Descriptivas}
 
-\subsection{Resumen de las Distribuciones de Variables}
+\subsubsection*{Resumen de las Distribuciones de Variables}
 
-Este apartado presenta un análisis exhaustivo de las estadísticas descriptivas y distribuciones de frecuencia para las variables principales del conjunto de datos wage1. La Tabla \ref{tab:descriptive_statistics} proporciona las estadísticas resumen para las variables continuas bajo examen: salarios por hora, años de educación, experiencia en el mercado laboral, antigüedad en el empleo y número de dependientes económicos.
+La Tabla \ref{tab:descriptive_statistics} proporciona las estadísticas resumen para las variables continuas: salarios por hora, años de educación, experiencia en el mercado laboral, antigüedad en el empleo y número de dependientes económicos.
 
-%\input{Tables/descriptive_statistics}
+\input{Tables/0201-descriptive_statistics}
 
-\subsection{Análisis de la Distribución Salarial}
+\subsubsection*{Análisis de la Distribución Salarial}
 
-La variable de salario, medida en dólares por hora, presenta una media de \$5.90 con una desviación estándar de \$3.69, como se muestra en la Tabla \ref{tab:descriptive_statistics}. La distribución demuestra un sesgo positivo pronunciado, evidenciado por la diferencia sustancial entre la media (\$5.90) y la mediana (\$4.65). Este sesgo hacia la derecha indica que mientras la mayoría de los trabajadores perciben salarios modestos, una pequeña proporción de trabajadores con altos ingresos influye significativamente en el promedio hacia arriba. El rango intercuartílico abarca desde \$3.33 hasta \$6.88, sugiriendo que el cincuenta por ciento de la fuerza laboral gana dentro de esta banda relativamente estrecha.
+La variable de salario, medida en dólares por hora, presenta una media de \$5.90 con una desviación estándar de \$3.69, como se muestra en la Tabla \ref{tab:0201-descriptive_statistics}. La distribución muestra un sesgo positivo pronunciado, evidenciado por la diferencia entre la media (\$5.90) y la mediana (\$4.65). Este sesgo hacia la derecha indica que mientras la mayoría de los trabajadores perciben salarios modestos, una pequeña proporción de trabajadores con altos ingresos influye significativamente en el promedio hacia arriba.
 
-La Figura \ref{fig:hist_wage} ilustra la distribución de frecuencias de los salarios, revelando una concentración de observaciones en el rango de \$2-\$6 con una cola larga hacia la derecha que se extiende hasta el valor máximo de \$24.98. El coeficiente de variación, calculado en 62.5\%, indica una variabilidad relativa sustancial en los salarios a través de la muestra. Este patrón se alinea con los fenómenos de desigualdad salarial bien documentados en la literatura de economía laboral, donde las diferencias en capital humano y la segmentación del mercado laboral contribuyen a la dispersión de ingresos.
+La Figura \ref{fig:hist_wage} ilustra la distribución de frecuencias de los salarios, revelando una concentración de observaciones en el rango de \$2-\$6 con una cola larga hacia la derecha que se extiende hasta el valor máximo de \$24.98. Este patrón se alinea con los fenómenos de desigualdad salarial bien documentados en la literatura de economía laboral, donde las diferencias en capital humano y la segmentación del mercado laboral contribuyen a la dispersión de ingresos.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{hist_wage.png}
+\includegraphics[width=0.8\textwidth]{Figures/0201-hist_wage.eps}
 \caption{Distribución de Frecuencias de Salarios}
 \label{fig:hist_wage}
 \end{figure}
 
-\subsection{Patrones de Logro Educativo}
+\subsubsection*{Patrones de Logro Educativo}
 
-La variable de educación presenta una característica distribucional única, con una media de 12.56 años y una desviación estándar de 2.77 años. La Figura \ref{fig:hist_educ} revela una concentración notable exactamente en 12 años de educación, correspondiente a la finalización de la educación secundaria. Este pico modal, que abarca aproximadamente 200 observaciones o el 38\% de la muestra, domina la distribución y sugiere que la fuerza laboral consiste principalmente en graduados de secundaria.
+La variable de educación presenta una media de 12.56 años y una desviación estándar de 2.77 años. La Figura \ref{fig:hist_educ} revela una concentración notable exactamente en 12 años de educación, correspondiente a la finalización de la educación secundaria. Este pico modal, que abarca aproximadamente 200 observaciones, domina la distribución y sugiere que la fuerza laboral consiste principalmente en graduados de secundaria.
 
-La desviación estándar relativamente modesta indica heterogeneidad educativa limitada dentro de la muestra. El rango se extiende desde 0 hasta 18 años, capturando individuos sin educación formal hasta aquellos con títulos de posgrado. Sin embargo, la concentración alrededor de la finalización de la educación secundaria sugiere que esta muestra puede representar un segmento particular del mercado laboral, posiblemente trabajadores del sector manufacturero o de servicios donde la educación secundaria sigue siendo la calificación estándar.
+La desviación estándar relativamente modesta indica heterogeneidad educativa limitada dentro de la muestra. El rango se extiende desde 0 hasta 18 años, capturando individuos sin educación formal hasta aquellos con títulos de posgrado. Sin embargo, la concentración alrededor de la finalización de la educación secundaria sugiere que esta muestra puede representar un segmento particular del mercado laboral, posiblemente trabajadores del sector manufacturero o de servicios.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{hist_educ.png}
+\includegraphics[width=0.8\textwidth]{Figures/0201-hist_educ.eps}
 \caption{Distribución de Frecuencias de Años de Educación}
 \label{fig:hist_educ}
 \end{figure}
 
-\subsection{Distribución de Experiencia y Dinámica Profesional}
+\subsubsection*{Distribución de Experiencia y Dinámica Profesional}
 
-La experiencia en el mercado laboral, con una media de 17.02 años y una desviación estándar de 13.57 años, exhibe una variabilidad considerable a través de la muestra. El coeficiente de variación del 79.7\% indica heterogeneidad sustancial en los niveles de experiencia de la fuerza laboral. La Figura \ref{fig:hist_exper} demuestra una distribución con sesgo positivo, con la frecuencia más alta ocurriendo entre trabajadores con niveles de experiencia relativamente bajos (1-10 años), seguida de una disminución gradual en frecuencia a medida que aumenta la experiencia.
+La experiencia en el mercado laboral, con una media de 17.02 años y una desviación estándar de 13.57 años, muestra una variabilidad considerable a través de la muestra. La Figura \ref{fig:hist_exper} muestra una distribución con sesgo positivo, con la frecuencia más alta ocurriendo entre trabajadores con niveles de experiencia relativamente bajos (1-10 años), seguida de una disminución gradual en frecuencia a medida que aumenta la experiencia.
 
 La mediana de experiencia de 13.5 años cae por debajo de la media, confirmando el sesgo positivo de la distribución. El valor máximo de 51 años indica la presencia de trabajadores acercándose a la edad de jubilación, mientras que el mínimo de 1 año sugiere recién ingresados al mercado laboral. Este amplio rango refleja una fuerza laboral que abarca múltiples etapas profesionales, desde trabajadores en inicio de carrera hasta aquellos con participación extensa en el mercado laboral.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{hist_exper.png}
+\includegraphics[width=0.8\textwidth]{Figures/0201-hist_expr.eps}
 \caption{Distribución de Frecuencias de Años de Experiencia}
 \label{fig:hist_exper}
 \end{figure}
 
-\subsection{Antigüedad Laboral y Estabilidad en el Empleo}
+\subsubsection*{Antigüedad Laboral y Estabilidad en el Empleo}
 
-La variable de antigüedad presenta las características distribucionales más extremas entre todas las variables examinadas. Con una media de 5.10 años pero una mediana de solo 2 años, la distribución exhibe un sesgo positivo severo. La Figura \ref{fig:hist_tenure} revela que aproximadamente 220 trabajadores (41.8\% de la muestra) reportan cero antigüedad con su empleador actual, sugiriendo tasas altas de rotación laboral o que la recolección de datos ocurrió durante un período de actividad de contratación sustancial.
+La variable de antigüedad presenta las características distribucionales más extremas entre todas las variables examinadas. Con una media de 5.10 años pero una mediana de solo 2 años, la distribución exhibe un sesgo positivo severo. La Figura \ref{fig:hist_tenure} revela que aproximadamente 220 trabajadores (~42\% de la muestra) reportan cero antigüedad con su empleador actual, sugiriendo tasas altas de rotación laboral.
 
-La desviación estándar de 7.22 años excede la media, indicando variabilidad extrema en los patrones de vinculación laboral. Mientras que la mayoría de los trabajadores demuestran antigüedad limitada con su empleador actual, el valor máximo de 44 años revela la presencia de trabajadores con estabilidad laboral excepcional. Este patrón bimodal sugiere segmentación del mercado laboral entre trabajadores que experimentan transiciones laborales frecuentes y aquellos que mantienen relaciones de empleo a largo plazo.
+La desviación estándar de 7.22 años excede la media, indicando variabilidad extrema en los patrones de vinculación laboral. Mientras que la mayoría de los trabajadores demuestran antigüedad limitada con su empleador actual, el valor máximo de 44 años revela la presencia de trabajadores con estabilidad laboral excepcional.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{hist_tenure.png}
+\includegraphics[width=0.8\textwidth]{Figures/0201-hist_tenr.eps}
 \caption{Distribución de Frecuencias de Años de Antigüedad}
 \label{fig:hist_tenure}
 \end{figure}
 
-\subsection{Composición del Hogar y Dependientes}
+\subsubsection*{Composición del Hogar y Dependientes}
 
-La variable del número de dependientes muestra una media de 1.04 con una desviación estándar de 1.26. La distribución se concentra fuertemente en valores bajos, con la mediana en 1 dependiente. El valor modal parece ser 0, sugiriendo una proporción sustancial de trabajadores sin dependientes. El máximo de 6 dependientes ocurre raramente en la muestra, indicando que las familias grandes son poco comunes entre esta fuerza laboral.
+La variable del número de dependientes muestra una media de 1.04 con una desviación estándar de 1.26. La distribución se concentra fuertemente en valores bajos, con la mediana en 1 dependiente. El máximo de 6 dependientes ocurre raramente en la muestra, indicando que las familias grandes son poco comunes entre esta fuerza laboral.
 
-\begin{figure}[H]
+\begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{hist_numdep.png}
+\includegraphics[width=0.8\textwidth]{Figures/0201-hist_numd.eps}
 \caption{Distribución de Frecuencias de Número de Dependientes}
 \label{fig:hist_numdep}
 \end{figure}
 
-\subsection{Implicaciones Económicas y Síntesis}
+\subsubsection*{Interpretación general}
 
-El análisis descriptivo revela varios patrones importantes que caracterizan esta muestra del mercado laboral. Primero, la pronunciada desigualdad salarial, evidenciada por la distribución sesgada de salarios y el alto coeficiente de variación, refleja resultados típicos del mercado laboral donde los retornos al capital humano y la habilidad no observada crean diferenciales de ingresos sustanciales. Segundo, la concentración del logro educativo en el nivel de secundaria sugiere una fuerza laboral posicionada en el medio de la distribución de habilidades, no dominada ni por graduados universitarios ni por trabajadores sin educación básica.
+El análisis descriptivo revela varios patrones importantes que caracterizan esta muestra del mercado laboral. Primero, la pronunciada desigualdad salarial, evidenciada por la distribución sesgada de salarios. Segundo, la concentración del logro educativo en el nivel de secundaria sugiere una fuerza laboral posicionada en el medio de la distribución de habilidades, no dominada ni por graduados universitarios ni por trabajadores sin educación básica.
 
-La desconexión entre la experiencia promedio (17 años) y la antigüedad promedio (5 años) indica movilidad laboral sustancial a lo largo de las carreras de los trabajadores. Este patrón, combinado con la alta proporción de trabajadores con cero antigüedad, sugiere un mercado laboral dinámico caracterizado por transiciones laborales frecuentes. Tal movilidad puede reflejar tanto cambios de trabajo voluntarios para el avance profesional como separaciones involuntarias debido a condiciones económicas.
+La desconexión entre la experiencia promedio (17 años) y la antigüedad promedio (5 años) indica movilidad laboral sustancial a lo largo de las carreras de los trabajadores. Tal movilidad puede reflejar tanto cambios de trabajo voluntarios para el avance profesional como separaciones involuntarias debido a condiciones económicas.
 
-El número promedio relativamente bajo de dependientes, junto con la proporción sustancial de trabajadores sin dependientes, puede indicar una demografía de fuerza laboral más joven o patrones cambiantes de formación familiar. Esta característica tiene implicaciones para las decisiones de oferta laboral, ya que los trabajadores con menos obligaciones familiares pueden exhibir diferentes comportamientos en el mercado laboral con respecto a las horas trabajadas, la movilidad laboral y los niveles de salario de reserva.
+El número promedio relativamente bajo de dependientes, junto con la proporción sustancial de trabajadores sin dependientes, puede indicar una demografía de fuerza laboral más joven.
 
-Estas características distribucionales pintan colectivamente un cuadro de un segmento del mercado laboral caracterizado por niveles de habilidad moderados, dispersión salarial significativa, alta movilidad laboral y estructuras familiares variadas. Comprender estos patrones proporciona contexto esencial para los análisis econométricos subsecuentes que examinen la determinación salarial, los retornos al capital humano y las dinámicas del mercado laboral dentro de esta población.
+Estas características distribucionales muestran colectivamente un cuadro de un segmento del mercado laboral caracterizado por niveles de habilidad moderados, dispersión salarial significativa, alta movilidad laboral y estructuras familiares variadas.
 
+\subsubsection*{Salida de Stata de la parte a}
 
+%\lstinputlisting[label=lst:hwrk-0201-a]{Outputs/ecnm-2502-outp-hwrk-0201-a.txt}
+
+\subsection*{b) Análisis de variables categóricas}
+
+\subsubsection*{Distribución y Características de las Variables Binarias}
+
+El análisis de las variables categóricas \texttt{nonwhite}, \texttt{female} y \texttt{married} proporciona información fundamental sobre la composición demográfica de la muestra. La Tabla \ref{tab:categorical_summary} presenta un resumen de estas variables binarias, mientras que las Tablas \ref{tab:0201-nonwhite_frequency}, \ref{tab:female_frequency} y \ref{tab:married_frequency} detallan sus distribuciones individuales.
+
+\input{Tables/0201-nonwhite_frequency.tex}
+\label{tab:0201-nonwhite-freq}
+
+\subsubsection*{Composición Racial}
+
+La variable \texttt{nonwhite} revela una muestra predominantemente blanca, con solo el 10.27\% (54 trabajadores) identificados como no blancos y el 89.73\% (472 trabajadores) como blancos. Esta distribución refleja la composición racial del mercado laboral estadounidense durante el período de recolección de datos, aunque muestra una subrepresentación de minorías étnicas comparada con los promedios nacionales actuales.
+
+La Tabla \ref{tab:descriptives_by_race} presenta diferencias notables en las características económicas por grupo racial. Los trabajadores blancos perciben salarios promedio de \$5.94 por hora, mientras que los no blancos reciben \$5.48, una diferencia de \$0.47 o aproximadamente 8\% menos. Esta brecha salarial persiste a pesar de que los trabajadores no blancos tienen ligeramente más experiencia laboral (17.59 vs 16.95 años). Los trabajadores no blancos presentan menor logro educativo promedio (11.87 vs 12.64 años), equivalente a casi un año menos de escolaridad. Esta diferencia educativa podría explicar parcialmente la disparidad salarial observada, aunque no puede descartarse la presencia de discriminación laboral.
+
+\subsubsection*{Distribución por Género}
+
+La variable \texttt{female} muestra una distribución relativamente equilibrada con 52.09\% hombres (274 trabajadores) y 47.91\% mujeres (252 trabajadoras). Esta proporción cercana a la paridad sugiere una muestra representativa en términos de participación laboral por género para el período analizado.
+
+Sin embargo, la Tabla \ref{tab:descriptives_by_gender} revela disparidades económicas sustanciales entre géneros. Los hombres ganan en promedio \$7.10 por hora comparado con \$4.59 para las mujeres, representando una brecha salarial del 54.7\%. Esta diferencia dramática constituye la disparidad más pronunciada entre todas las variables categóricas analizadas. Las mujeres también presentan menor educación promedio (12.32 vs 12.79 años), menor experiencia laboral (16.43 vs 17.56 años), y notablemente menor antigüedad laboral (3.62 vs 6.47 años). La diferencia en antigüedad sugiere mayor rotación laboral femenina, posiblemente relacionada con interrupciones de carrera por responsabilidades familiares o discriminación en retención laboral.
+
+\subsubsection*{Estado Civil}
+
+La variable \texttt{married} indica que el 60.84\% de la muestra (320 trabajadores) está casada, mientras que el 39.16\% (206 trabajadores) permanece soltera. Esta mayoría de trabajadores casados es consistente con patrones demográficos típicos de la fuerza laboral adulta.
+
+La Tabla \ref{tab:descriptives_by_marital} revela que los trabajadores casados perciben salarios significativamente superiores (\$6.57 vs \$4.84), una prima matrimonial del 35.7\%. Los casados también exhiben mayor experiencia laboral (20.47 vs 11.66 años) y antigüedad (6.49 vs 2.95 años). Estas diferencias sugieren que el matrimonio puede estar correlacionado con mayor estabilidad laboral y acumulación de capital humano, aunque también podría reflejar efectos de selección donde individuos con mejores perspectivas económicas tienen mayor probabilidad de casarse.
+
+\subsubsection*{Raza y Género}
+
+La distribución por género es notablemente similar entre grupos raciales: 51.91\% de los trabajadores blancos son hombres comparado con 53.70\% entre no blancos. Esta similitud sugiere que no existe segregación ocupacional significativa por género dentro de grupos raciales en esta muestra. Sin embargo, la combinación de ser mujer y no blanca (25 trabajadoras, 4.75\% de la muestra) representa el grupo más vulnerable a discriminación múltiple. Tablas \ref{tab:crosstab_race_gender}
+
+\subsubsection*{Raza y Estado Civil}
+
+Los trabajadores blancos muestran mayor tasa de matrimonio (61.86\%) comparado con los no blancos (51.85\%). Esta diferencia de 10 puntos porcentuales podría reflejar factores socioeconómicos que afectan las decisiones matrimoniales, incluyendo estabilidad económica y normas culturales diferenciadas. \ref{tab:crosstab_race_married}
+
+\subsubsection*{Género y Estado Civil}
+
+La Tabla \ref{tab:crosstab_gender_married} revela patrones matrimoniales marcadamente diferentes por género. El 68.61\% de los hombres están casados versus solo 52.38\% de las mujeres. Esta disparidad sugiere que las mujeres solteras tienen mayor participación laboral que los hombres solteros, consistente con teorías de especialización familiar donde las mujeres casadas enfrentan mayores barreras para la participación laboral.
+\ref{tab:crosstab_gender_married}
+
+\subsubsection*{Interpretación General}
+
+Los resultados revelan segmentación significativa del mercado laboral según características demográficas. Las brechas salariales observadas—8\% por raza, 54.7\% por género, y 35.7\% por estado civil—sugieren que factores más allá del capital humano influyen en la determinación salarial. La intersección de estas características probablemente amplifica las desventajas: una mujer no blanca soltera enfrenta múltiples penalizaciones salariales acumulativas.
+
+La menor antigüedad laboral de mujeres y trabajadores no blancos indica mayor vulnerabilidad a disrupciones laborales, menor acumulación de capital humano específico a la empresa, y potencialmente menor acceso a promociones internas. Estos patrones sugieren la necesidad de políticas laborales que aborden no solo las brechas salariales directas, sino también las barreras estructurales que impiden la acumulación de experiencia y antigüedad en grupos desfavorecidos.
+
+El análisis también sugiere que el matrimonio funciona como un marcador de estabilidad económica y laboral, aunque la causalidad permanece ambigua. Los trabajadores casados podrían recibir primas salariales debido a mayor productividad percibida, discriminación estadística favorable, o simplemente porque individuos económicamente exitosos tienen mayor probabilidad de casarse y permanecer casados.
+
+\subsubsection*{Salida de Stata de la parte b)}
+
+%\lstinputlisting[label=lst:hwrk-0201-b]{Outputs/ecnm-2502-outp-hwrk-0201-b.txt}
 
 \section{Regresión lineal simple: predicción de ventas}
 
