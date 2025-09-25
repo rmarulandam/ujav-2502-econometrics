@@ -1,0 +1,528 @@
+* =================================================================
+. * PART B: TABULATION AND DESCRIPTIVE STATISTICS FOR CATEGORICAL VARIABLES
+. * =================================================================
+. 
+. * Tabulate nonwhite variable
+. tabulate nonwhite
+
+      =1 if |
+   nonwhite |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        472       89.73       89.73
+          1 |         54       10.27      100.00
+------------+-----------------------------------
+      Total |        526      100.00
+
+. 
+. * Export nonwhite tabulation to LaTeX
+. estpost tabulate nonwhite
+
+    nonwhite |      e(b)     e(pct)  e(cumpct) 
+-------------+---------------------------------
+           0 |       472   89.73384   89.73384 
+           1 |        54   10.26616        100 
+-------------+---------------------------------
+       Total |       526        100            
+
+. esttab using "$tables_dir\0201-nonwhite_frequency.tex", replace ///
+>     cell(b(fmt(0)) pct(fmt(1))) ///
+>         unstack ///
+>     booktabs ///
+>     title("Distribution by Race") ///
+>     addnote("Frequency and percentage shown")   
+(output written to C:\repos\ujav-2502-econometrics\Tables\0201-nonwhite_frequency.tex)
+
+.         
+. * Tabulate female variable
+. tabulate female
+
+      =1 if |
+     female |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        274       52.09       52.09
+          1 |        252       47.91      100.00
+------------+-----------------------------------
+      Total |        526      100.00
+
+. 
+. * Export female tabulation to LaTeX
+. estpost tabulate female
+
+      female |      e(b)     e(pct)  e(cumpct) 
+-------------+---------------------------------
+           0 |       274   52.09125   52.09125 
+           1 |       252   47.90875        100 
+-------------+---------------------------------
+       Total |       526        100            
+
+. esttab using "$tables_dir/0201-female_frequency.tex", replace ///
+>     cell(b(fmt(0)) pct(fmt(1))) ///
+>     unstack ///
+>     booktabs ///
+>     title("Distribution by Gender") ///
+>     addnote("Frequency and percentage shown")
+(output written to C:\repos\ujav-2502-econometrics\Tables/0201-female_frequency.tex)
+
+. 
+. * Tabulate married variable
+. tabulate married
+
+      =1 if |
+    married |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        206       39.16       39.16
+          1 |        320       60.84      100.00
+------------+-----------------------------------
+      Total |        526      100.00
+
+. 
+. * Export married tabulation to LaTeX
+. estpost tabulate married
+
+     married |      e(b)     e(pct)  e(cumpct) 
+-------------+---------------------------------
+           0 |       206    39.1635    39.1635 
+           1 |       320    60.8365        100 
+-------------+---------------------------------
+       Total |       526        100            
+
+. esttab using "$tables_dir/0201-married_frequency.tex", replace ///
+>     cell(b(fmt(0)) pct(fmt(1))) ///
+>     unstack ///
+>     booktabs ///
+>     title("Distribution by Marital Status") ///
+>     addnote("Frequency and percentage shown")
+(output written to C:\repos\ujav-2502-econometrics\Tables/0201-married_frequency.tex)
+
+. 
+. * Descriptive statistics by nonwhite status
+. bysort nonwhite: summarize wage educ exper tenure
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> nonwhite = 0
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        wage |        472    5.944174    3.749617        .53      24.98
+        educ |        472    12.64195    2.691691          0         18
+       exper |        472    16.95127    13.58436          1         50
+      tenure |        472    5.076271    7.278689          0         44
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> nonwhite = 1
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        wage |         54    5.475926    3.155425       1.96         15
+        educ |         54    11.87037    3.319731          3         18
+       exper |         54    17.59259    13.57789          1         51
+      tenure |         54    5.351852    6.791108          0         30
+
+
+. 
+. * Create formatted table of means by race
+. estpost tabstat wage educ exper tenure, by(nonwhite) statistics(mean sd count) columns(statistics)
+
+Summary statistics: mean sd count
+     for variables: wage educ exper tenure
+  by categories of: nonwhite
+
+    nonwhite |   e(mean)      e(sd)   e(count) 
+-------------+---------------------------------
+0            |                                 
+        wage |  5.944174   3.749617        472 
+        educ |  12.64195   2.691691        472 
+       exper |  16.95127   13.58436        472 
+      tenure |  5.076271   7.278689        472 
+-------------+---------------------------------
+1            |                                 
+        wage |  5.475926   3.155425         54 
+        educ |  11.87037   3.319731         54 
+       exper |  17.59259   13.57789         54 
+      tenure |  5.351852   6.791108         54 
+-------------+---------------------------------
+Total        |                                 
+        wage |  5.896103   3.693086        526 
+        educ |  12.56274   2.769022        526 
+       exper |  17.01711   13.57216        526 
+      tenure |  5.104563   7.224462        526 
+
+. esttab using "$tables_dir/0201-descriptives_by_race.tex", replace ///
+>     cells("mean(fmt(2)) sd(fmt(2)) count(fmt(0))") ///
+>     booktabs ///
+>     title("Descriptive Statistics by Race") ///
+>     mtitles("White" "Non-White") ///
+>     addnote("Standard deviations shown below means")
+(output written to C:\repos\ujav-2502-econometrics\Tables/0201-descriptives_by_race.tex)
+
+. 
+. * Descriptive statistics by gender
+. bysort female: summarize wage educ exper tenure
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> female = 0
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        wage |        274    7.099489    4.160858        1.5      24.98
+        educ |        274    12.78832    3.002882          2         18
+       exper |        274    17.55839    13.49991          1         51
+      tenure |        274    6.474453    8.369297          0         44
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> female = 1
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        wage |        252    4.587659    2.529363        .53      21.63
+        educ |        252    12.31746    2.472642          0         18
+       exper |        252    16.42857    13.65274          1         50
+      tenure |        252    3.615079    5.357968          0         34
+
+
+. 
+. * Create formatted table of means by gender
+. estpost tabstat wage educ exper tenure, by(female) statistics(mean sd count) columns(statistics)
+
+Summary statistics: mean sd count
+     for variables: wage educ exper tenure
+  by categories of: female
+
+      female |   e(mean)      e(sd)   e(count) 
+-------------+---------------------------------
+0            |                                 
+        wage |  7.099489   4.160858        274 
+        educ |  12.78832   3.002882        274 
+       exper |  17.55839   13.49991        274 
+      tenure |  6.474453   8.369297        274 
+-------------+---------------------------------
+1            |                                 
+        wage |  4.587659   2.529363        252 
+        educ |  12.31746   2.472642        252 
+       exper |  16.42857   13.65274        252 
+      tenure |  3.615079   5.357968        252 
+-------------+---------------------------------
+Total        |                                 
+        wage |  5.896103   3.693086        526 
+        educ |  12.56274   2.769022        526 
+       exper |  17.01711   13.57216        526 
+      tenure |  5.104563   7.224462        526 
+
+. esttab using "$tables_dir/0201-descriptives_by_gender.tex", replace ///
+>     cells("mean(fmt(2)) sd(fmt(2)) count(fmt(0))") ///
+>     booktabs ///
+>     title("Descriptive Statistics by Gender") ///
+>     mtitles("Male" "Female") ///
+>     addnote("Standard deviations shown below means")
+(output written to C:\repos\ujav-2502-econometrics\Tables/0201-descriptives_by_gender.tex)
+
+. 
+. * Descriptive statistics by marital status
+. bysort married: summarize wage educ exper tenure
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> married = 0
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        wage |        206    4.843884    2.891138        .53      21.63
+        educ |        206    12.32524    2.738353          0         18
+       exper |        206    11.66019    13.10078          1         51
+      tenure |        206    2.946602     5.30826          0         30
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+-> married = 1
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        wage |        320    6.573469    3.987435       1.43      24.98
+        educ |        320    12.71562     2.78212          0         18
+       exper |        320    20.46562    12.74363          1         49
+      tenure |        320     6.49375    7.927569          0         44
+
+
+. 
+. * Create formatted table of means by marital status
+. estpost tabstat wage educ exper tenure, by(married) statistics(mean sd count) columns(statistics)
+
+Summary statistics: mean sd count
+     for variables: wage educ exper tenure
+  by categories of: married
+
+     married |   e(mean)      e(sd)   e(count) 
+-------------+---------------------------------
+0            |                                 
+        wage |  4.843884   2.891138        206 
+        educ |  12.32524   2.738353        206 
+       exper |  11.66019   13.10078        206 
+      tenure |  2.946602    5.30826        206 
+-------------+---------------------------------
+1            |                                 
+        wage |  6.573469   3.987435        320 
+        educ |  12.71562    2.78212        320 
+       exper |  20.46562   12.74363        320 
+      tenure |   6.49375   7.927569        320 
+-------------+---------------------------------
+Total        |                                 
+        wage |  5.896103   3.693086        526 
+        educ |  12.56274   2.769022        526 
+       exper |  17.01711   13.57216        526 
+      tenure |  5.104563   7.224462        526 
+
+. esttab using "$tables_dir/0201-descriptives_by_marital.tex", replace ///
+>     cells("mean(fmt(2)) sd(fmt(2)) count(fmt(0))") ///
+>     booktabs ///
+>     title("Descriptive Statistics by Marital Status") ///
+>     mtitles("Single" "Married") ///
+>     addnote("Standard deviations shown below means")
+(output written to C:\repos\ujav-2502-econometrics\Tables/0201-descriptives_by_marital.tex)
+
+. 
+. * =================================================================
+. * CROSS-TABULATIONS WITH LATEX EXPORT
+. * =================================================================
+. 
+. * Cross-tabulation: race and gender
+. tab2 nonwhite female, row column cell
+
+-> tabulation of nonwhite by female  
+
++-------------------+
+| Key               |
+|-------------------|
+|     frequency     |
+|  row percentage   |
+| column percentage |
+|  cell percentage  |
++-------------------+
+
+     =1 if |     =1 if female
+  nonwhite |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       245        227 |       472 
+           |     51.91      48.09 |    100.00 
+           |     89.42      90.08 |     89.73 
+           |     46.58      43.16 |     89.73 
+-----------+----------------------+----------
+         1 |        29         25 |        54 
+           |     53.70      46.30 |    100.00 
+           |     10.58       9.92 |     10.27 
+           |      5.51       4.75 |     10.27 
+-----------+----------------------+----------
+     Total |       274        252 |       526 
+           |     52.09      47.91 |    100.00 
+           |    100.00     100.00 |    100.00 
+           |     52.09      47.91 |    100.00 
+
+. 
+. * Export cross-tabulation to LaTeX
+. estpost tabulate nonwhite female
+
+female       |                                            
+    nonwhite |      e(b)     e(pct)  e(colpct)  e(rowpct) 
+-------------+--------------------------------------------
+0            |                                            
+           0 |       245   46.57795   89.41606   51.90678 
+           1 |        29   5.513308   10.58394    53.7037 
+       Total |       274   52.09125        100   52.09125 
+-------------+--------------------------------------------
+1            |                                            
+           0 |       227   43.15589   90.07937   48.09322 
+           1 |        25   4.752852   9.920635    46.2963 
+       Total |       252   47.90875        100   47.90875 
+-------------+--------------------------------------------
+Total        |                                            
+           0 |       472   89.73384   89.73384        100 
+           1 |        54   10.26616   10.26616        100 
+       Total |       526        100        100        100 
+
+. esttab using "$tables_dir/0201-crosstab_race_gender.tex", replace ///
+>     cell(b(fmt(0))) ///
+>     booktabs ///
+>     title("Cross-tabulation: Race by Gender") ///
+>     addnote("Cell frequencies shown")
+(output written to C:\repos\ujav-2502-econometrics\Tables/0201-crosstab_race_gender.tex)
+
+. 
+. * Cross-tabulation: race and marital status
+. tab2 nonwhite married, row column cell
+
+-> tabulation of nonwhite by married  
+
++-------------------+
+| Key               |
+|-------------------|
+|     frequency     |
+|  row percentage   |
+| column percentage |
+|  cell percentage  |
++-------------------+
+
+     =1 if |     =1 if married
+  nonwhite |         0          1 |     Total
+-----------+----------------------+----------
+         0 |       180        292 |       472 
+           |     38.14      61.86 |    100.00 
+           |     87.38      91.25 |     89.73 
+           |     34.22      55.51 |     89.73 
+-----------+----------------------+----------
+         1 |        26         28 |        54 
+           |     48.15      51.85 |    100.00 
+           |     12.62       8.75 |     10.27 
+           |      4.94       5.32 |     10.27 
+-----------+----------------------+----------
+     Total |       206        320 |       526 
+           |     39.16      60.84 |    100.00 
+           |    100.00     100.00 |    100.00 
+           |     39.16      60.84 |    100.00 
+
+. 
+. * Export to LaTeX
+. estpost tabulate nonwhite married
+
+married      |                                            
+    nonwhite |      e(b)     e(pct)  e(colpct)  e(rowpct) 
+-------------+--------------------------------------------
+0            |                                            
+           0 |       180   34.22053   87.37864   38.13559 
+           1 |        26   4.942966   12.62136   48.14815 
+       Total |       206    39.1635        100    39.1635 
+-------------+--------------------------------------------
+1            |                                            
+           0 |       292   55.51331      91.25   61.86441 
+           1 |        28   5.323194       8.75   51.85185 
+       Total |       320    60.8365        100    60.8365 
+-------------+--------------------------------------------
+Total        |                                            
+           0 |       472   89.73384   89.73384        100 
+           1 |        54   10.26616   10.26616        100 
+       Total |       526        100        100        100 
+
+. esttab using "$tables_dir/0201-crosstab_race_married.tex", replace ///
+>     cell(b(fmt(0))) ///
+>     booktabs ///
+>     title("Cross-tabulation: Race by Marital Status") ///
+>     addnote("Cell frequencies shown")
+(output written to C:\repos\ujav-2502-econometrics\Tables/0201-crosstab_race_married.tex)
+
+. 
+. * Cross-tabulation: gender and marital status  
+. tab2 female married, row column cell
+
+-> tabulation of female by married  
+
++-------------------+
+| Key               |
+|-------------------|
+|     frequency     |
+|  row percentage   |
+| column percentage |
+|  cell percentage  |
++-------------------+
+
+     =1 if |     =1 if married
+    female |         0          1 |     Total
+-----------+----------------------+----------
+         0 |        86        188 |       274 
+           |     31.39      68.61 |    100.00 
+           |     41.75      58.75 |     52.09 
+           |     16.35      35.74 |     52.09 
+-----------+----------------------+----------
+         1 |       120        132 |       252 
+           |     47.62      52.38 |    100.00 
+           |     58.25      41.25 |     47.91 
+           |     22.81      25.10 |     47.91 
+-----------+----------------------+----------
+     Total |       206        320 |       526 
+           |     39.16      60.84 |    100.00 
+           |    100.00     100.00 |    100.00 
+           |     39.16      60.84 |    100.00 
+
+. 
+. * Export to LaTeX
+. estpost tabulate female married
+
+married      |                                            
+      female |      e(b)     e(pct)  e(colpct)  e(rowpct) 
+-------------+--------------------------------------------
+0            |                                            
+           0 |        86   16.34981   41.74757   31.38686 
+           1 |       120   22.81369   58.25243   47.61905 
+       Total |       206    39.1635        100    39.1635 
+-------------+--------------------------------------------
+1            |                                            
+           0 |       188   35.74144      58.75   68.61314 
+           1 |       132   25.09506      41.25   52.38095 
+       Total |       320    60.8365        100    60.8365 
+-------------+--------------------------------------------
+Total        |                                            
+           0 |       274   52.09125   52.09125        100 
+           1 |       252   47.90875   47.90875        100 
+       Total |       526        100        100        100 
+
+. esttab using "$tables_dir/0201-crosstab_gender_married.tex", replace ///
+>     cell(b(fmt(0))) ///
+>     booktabs ///
+>     title("Cross-tabulation: Gender by Marital Status") ///
+>     addnote("Cell frequencies shown")
+(output written to C:\repos\ujav-2502-econometrics\Tables/0201-crosstab_gender_married.tex)
+
+. 
+. * =================================================================
+. * THREE-WAY TABULATION (DISPLAY ONLY - NOT EXPORTED TO LATEX)
+. * =================================================================
+. 
+. * Three-way tabulation - display results in Stata output
+. display as text "Three-way tabulation (Race × Gender × Marital Status):"
+Three-way tabulation (Race × Gender × Marital Status):
+
+. table nonwhite female married, statistic(frequency)
+
+-------------------------------------
+                 |    =1 if married  
+                 |    0     1   Total
+-----------------+-------------------
+=1 if nonwhite   |                   
+  0              |                   
+    =1 if female |                   
+      0          |   77   168     245
+      1          |  103   124     227
+      Total      |  180   292     472
+  1              |                   
+    =1 if female |                   
+      0          |    9    20      29
+      1          |   17     8      25
+      Total      |   26    28      54
+  Total          |                   
+    =1 if female |                   
+      0          |   86   188     274
+      1          |  120   132     252
+      Total      |  206   320     526
+-------------------------------------
+
+. 
+. * =================================================================
+. * SUMMARY TABLE OF ALL CATEGORICAL VARIABLES
+. * =================================================================
+. 
+. * Create a comprehensive summary of all categorical variables
+. estpost tabstat nonwhite female married, statistics(mean count) columns(statistics)
+
+Summary statistics: mean count
+     for variables: nonwhite female married
+
+             |   e(mean)   e(count) 
+-------------+----------------------
+    nonwhite |  .1026616        526 
+      female |  .4790875        526 
+     married |   .608365        526 
+
+. esttab using "$tables_dir/0201-categorical_summary.tex", replace ///
+>     cells("mean(fmt(3)) count(fmt(0))") ///
+>     booktabs ///
+>     title("Summary of Categorical Variables") ///
+>     addnote("Proportions and sample sizes shown")
+(output written to C:\repos\ujav-2502-econometrics\Tables/0201-categorical_summary.tex)
+
+. 
+end of do-file

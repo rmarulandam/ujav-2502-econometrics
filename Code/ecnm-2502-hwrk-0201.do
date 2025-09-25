@@ -6,26 +6,26 @@
 clear all
 
 * Defining directory structure using local macros
-local project_root "C:\repos\ujav-2502-econometrics"
-local code_dir "`project_root'\Code"
-local figures_dir "`project_root'\Figures"
-local tables_dir "`project_root'\Tables"
-local data_dir "`project_root'\Data"
+global project_root "C:\repos\ujav-2502-econometrics"
+global code_dir "$project_root\Code"
+global figures_dir "$project_root\Figures"
+global tables_dir "$project_root\Tables"
+global data_dir "$project_root\Data"
 
-cd "`project_root'" 
+cd "$project_root" 
 
 * --- 2. LOAD AND PREPARE DATA ---
 
-use "`data_dir'/ecnm-2502-hwrk-0201.dta", clear /// equivalent to "wage1.dta"
+use "$data_dir/ecnm-2502-hwrk-0201.dta" /// equivalent to "wage1.dta"
 
 ********************************************************************************
 * PART A: DESCRIPTIVE STATISTICS AND HISTOGRAMS
 ********************************************************************************
 
 * Calculate descriptive statistics for wage, educ, exper, tenure, and numdep
-*summarize wage educ exper tenure numdep, detail
+summarize wage educ exper tenure numdep, detail
 estpost summarize wage educ exper tenure numdep
-esttab using "`tables_dir'\descriptive_statistics.tex", replace ///
+esttab using "$tables_dir\descriptive_statistics.tex", replace ///
     cells("mean(fmt(2)) sd(fmt(2)) min max count") ///
     label booktabs title("Descriptive Statistics")
 
@@ -87,38 +87,138 @@ graph export "`figures_dir'/0201-hist_tenr.png", name(hist_tenure) replace // Fo
 graph export "`figures_dir'/0201-hist_numd.eps", name(hist_numdep) replace // For latex
 graph export "`figures_dir'/0201-hist_numd.eps", name(hist_numdep) replace // For review
 
-********************************************************************************
+* =================================================================
 * PART B: TABULATION AND DESCRIPTIVE STATISTICS FOR CATEGORICAL VARIABLES
-********************************************************************************
+* =================================================================
 
 * Tabulate nonwhite variable
 tabulate nonwhite
-tab1 nonwhite, missing
+
+* Export nonwhite tabulation to LaTeX
+estpost tabulate nonwhite
+esttab using "$tables_dir\0201-nonwhite_frequency.tex", replace ///
+    cell(b(fmt(0)) pct(fmt(1))) ///
+	unstack ///
+    booktabs ///
+    title("Distribution by Race") ///
+    addnote("Frequency and percentage shown")	
+	
+* Tabulate female variable
+tabulate female
+
+* Export female tabulation to LaTeX
+estpost tabulate female
+esttab using "`tables_dir'/0201-female_frequency.tex", replace ///
+    cell(b(fmt(0)) pct(fmt(1))) ///
+    unstack ///
+    booktabs ///
+    title("Distribution by Gender") ///
+    addnote("Frequency and percentage shown")
+
+* Tabulate married variable
+tabulate married
+
+* Export married tabulation to LaTeX
+estpost tabulate married
+esttab using "`tables_dir'/0201-married_frequency.tex", replace ///
+    cell(b(fmt(0)) pct(fmt(1))) ///
+    unstack ///
+    booktabs ///
+    title("Distribution by Marital Status") ///
+    addnote("Frequency and percentage shown")
 
 * Descriptive statistics by nonwhite status
 bysort nonwhite: summarize wage educ exper tenure
 
-* Tabulate female variable
-tabulate female
-tab1 female, missing
+* Create formatted table of means by race
+estpost tabstat wage educ exper tenure, by(nonwhite) statistics(mean sd count) columns(statistics)
+esttab using "`tables_dir'/0201-descriptives_by_race.tex", replace ///
+    cells("mean(fmt(2)) sd(fmt(2)) count(fmt(0))") ///
+    booktabs ///
+    title("Descriptive Statistics by Race") ///
+    mtitles("White" "Non-White") ///
+    addnote("Standard deviations shown below means")
 
 * Descriptive statistics by gender
 bysort female: summarize wage educ exper tenure
 
-* Tabulate married variable
-tabulate married
-tab1 married, missing
+* Create formatted table of means by gender
+estpost tabstat wage educ exper tenure, by(female) statistics(mean sd count) columns(statistics)
+esttab using "`tables_dir'/0201-descriptives_by_gender.tex", replace ///
+    cells("mean(fmt(2)) sd(fmt(2)) count(fmt(0))") ///
+    booktabs ///
+    title("Descriptive Statistics by Gender") ///
+    mtitles("Male" "Female") ///
+    addnote("Standard deviations shown below means")
 
 * Descriptive statistics by marital status
 bysort married: summarize wage educ exper tenure
 
-* Cross-tabulations to understand relationships
+* Create formatted table of means by marital status
+estpost tabstat wage educ exper tenure, by(married) statistics(mean sd count) columns(statistics)
+esttab using "`tables_dir'/0201-descriptives_by_marital.tex", replace ///
+    cells("mean(fmt(2)) sd(fmt(2)) count(fmt(0))") ///
+    booktabs ///
+    title("Descriptive Statistics by Marital Status") ///
+    mtitles("Single" "Married") ///
+    addnote("Standard deviations shown below means")
+
+* =================================================================
+* CROSS-TABULATIONS WITH LATEX EXPORT
+* =================================================================
+
+* Cross-tabulation: race and gender
 tab2 nonwhite female, row column cell
+
+* Export cross-tabulation to LaTeX
+estpost tabulate nonwhite female
+esttab using "`tables_dir'/0201-crosstab_race_gender.tex", replace ///
+    cell(b(fmt(0))) ///
+    booktabs ///
+    title("Cross-tabulation: Race by Gender") ///
+    addnote("Cell frequencies shown")
+
+* Cross-tabulation: race and marital status
 tab2 nonwhite married, row column cell
+
+* Export to LaTeX
+estpost tabulate nonwhite married
+esttab using "`tables_dir'/0201-crosstab_race_married.tex", replace ///
+    cell(b(fmt(0))) ///
+    booktabs ///
+    title("Cross-tabulation: Race by Marital Status") ///
+    addnote("Cell frequencies shown")
+
+* Cross-tabulation: gender and marital status  
 tab2 female married, row column cell
 
-* Three-way tabulation
+* Export to LaTeX
+estpost tabulate female married
+esttab using "`tables_dir'/0201-crosstab_gender_married.tex", replace ///
+    cell(b(fmt(0))) ///
+    booktabs ///
+    title("Cross-tabulation: Gender by Marital Status") ///
+    addnote("Cell frequencies shown")
+
+* =================================================================
+* THREE-WAY TABULATION (DISPLAY ONLY - NOT EXPORTED TO LATEX)
+* =================================================================
+
+* Three-way tabulation - display results in Stata output
+display as text "Three-way tabulation (Race × Gender × Marital Status):"
 table nonwhite female married, statistic(frequency)
+
+* =================================================================
+* SUMMARY TABLE OF ALL CATEGORICAL VARIABLES
+* =================================================================
+
+* Create a comprehensive summary of all categorical variables
+estpost tabstat nonwhite female married, statistics(mean count) columns(statistics)
+esttab using "`tables_dir'/0201-categorical_summary.tex", replace ///
+    cells("mean(fmt(3)) count(fmt(0))") ///
+    booktabs ///
+    title("Summary of Categorical Variables") ///
+    addnote("Proportions and sample sizes shown")
 
 ********************************************************************************
 * PART C: COUNT NON-WHITE FEMALES

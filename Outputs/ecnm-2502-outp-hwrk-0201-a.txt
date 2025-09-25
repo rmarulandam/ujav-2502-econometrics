@@ -1,0 +1,118 @@
+********************************************************************************
+. * OUTPUT PART A: DESCRIPTIVE STATISTICS AND HISTOGRAMS
+. ********************************************************************************
+. 
+. * Calculate descriptive statistics for wage, educ, exper, tenure, and numdep
+. *summarize wage educ exper tenure numdep, detail
+. estpost summarize wage educ exper tenure numdep
+
+             |  e(count)   e(sum_w)    e(mean)     e(Var)      e(sd)     e(min)     e(max)     e(sum) 
+-------------+----------------------------------------------------------------------------------------
+        wage |       526        526   5.896103   13.63888   3.693086        .53      24.98    3101.35 
+        educ |       526        526   12.56274   7.667485   2.769022          0         18       6608 
+       exper |       526        526   17.01711   184.2035   13.57216          1         51       8951 
+      tenure |       526        526   5.104563   52.19286   7.224462          0         44       2685 
+      numdep |       526        526   1.043726    1.59237   1.261891          0          6        549 
+
+. esttab using "`tables_dir'\descriptive_statistics.tex", replace ///
+>     cells("mean(fmt(2)) sd(fmt(2)) min max count") ///
+>     label booktabs title("Descriptive Statistics")
+(output written to C:\repos\ujav-2502-econometrics\Tables\descriptive_statistics.tex)
+
+. 
+. * Store results in a table format
+. tabstat wage educ exper tenure numdep, ///
+>     statistics(count mean sd min p25 p50 p75 max) ///
+>     columns(statistics) format(%9.2f)
+
+    Variable |         N      Mean        SD       Min       p25       p50       p75       Max
+-------------+--------------------------------------------------------------------------------
+        wage |    526.00      5.90      3.69      0.53      3.33      4.65      6.88     24.98
+        educ |    526.00     12.56      2.77      0.00     12.00     12.00     14.00     18.00
+       exper |    526.00     17.02     13.57      1.00      5.00     13.50     26.00     51.00
+      tenure |    526.00      5.10      7.22      0.00      0.00      2.00      7.00     44.00
+      numdep |    526.00      1.04      1.26      0.00      0.00      1.00      2.00      6.00
+----------------------------------------------------------------------------------------------
+
+. 
+. * Create histograms for each variable
+. * Wage histogram
+. histogram wage, frequency ///
+>     title("Frequency Distribution of Wages") ///
+>     xtitle("Wage (dollars per hour)") ///
+>     ytitle("Frequency") ///
+>     scheme(s2color) ///
+>     name(hist_wage, replace)
+(bin=22, start=.52999997, width=1.1113636)
+
+. 
+. * Education histogram    
+. histogram educ, frequency discrete ///
+>     title("Frequency Distribution of Education") ///
+>     xtitle("Years of Education") ///
+>     ytitle("Frequency") ///
+>     scheme(s2color) ///
+>     name(hist_educ, replace)
+(start=0, width=1)
+
+. 
+. * Experience histogram
+. histogram exper, frequency ///
+>     title("Frequency Distribution of Experience") ///
+>     xtitle("Years of Experience") ///
+>     ytitle("Frequency") ///
+>     scheme(s2color) ///
+>     name(hist_exper, replace)
+(bin=22, start=1, width=2.2727273)
+
+. 
+. * Tenure histogram    
+. histogram tenure, frequency ///
+>     title("Frequency Distribution of Tenure") ///
+>     xtitle("Years with Current Employer") ///
+>     ytitle("Frequency") ///
+>     scheme(s2color) ///
+>     name(hist_tenure, replace)
+(bin=22, start=0, width=2)
+
+. 
+. * Number of dependents histogram
+. histogram numdep, frequency discrete ///
+>     title("Frequency Distribution of Number of Dependents") ///
+>     xtitle("Number of Dependents") ///
+>     ytitle("Frequency") ///
+>     scheme(s2color) ///
+>     name(hist_numdep, replace)
+(start=0, width=1)
+
+. 
+. * Export histograms
+. graph export "`figures_dir'/0201-hist_wage.eps", name(hist_wage) replace //For latex
+file C:\repos\ujav-2502-econometrics\Figures/0201-hist_wage.eps saved as EPS format
+
+. graph export "`figures_dir'/0201-hist_wage.png", name(hist_wage) replace //For review
+file C:\repos\ujav-2502-econometrics\Figures/0201-hist_wage.png saved as PNG format
+
+. graph export "`figures_dir'/0201-hist_educ.eps", name(hist_educ) replace //For latex
+file C:\repos\ujav-2502-econometrics\Figures/0201-hist_educ.eps saved as EPS format
+
+. graph export "`figures_dir'/0201-hist_educ.png", name(hist_educ) replace //For review  
+file C:\repos\ujav-2502-econometrics\Figures/0201-hist_educ.png saved as PNG format
+
+. graph export "`figures_dir'/0201-hist_expr.eps", name(hist_exper) replace // For latex
+file C:\repos\ujav-2502-econometrics\Figures/0201-hist_expr.eps saved as EPS format
+
+. graph export "`figures_dir'/0201-hist_expr.png", name(hist_exper) replace // For review
+file C:\repos\ujav-2502-econometrics\Figures/0201-hist_expr.png saved as PNG format
+
+. graph export "`figures_dir'/0201-hist_tenr.eps", name(hist_tenure) replace // For latex
+file C:\repos\ujav-2502-econometrics\Figures/0201-hist_tenr.eps saved as EPS format
+
+. graph export "`figures_dir'/0201-hist_tenr.png", name(hist_tenure) replace // For review
+file C:\repos\ujav-2502-econometrics\Figures/0201-hist_tenr.png saved as PNG format
+
+. graph export "`figures_dir'/0201-hist_numd.eps", name(hist_numdep) replace // For latex
+file C:\repos\ujav-2502-econometrics\Figures/0201-hist_numd.eps saved as EPS format
+
+. graph export "`figures_dir'/0201-hist_numd.eps", name(hist_numdep) replace // For review
+file C:\repos\ujav-2502-econometrics\Figures/0201-hist_numd.eps saved as EPS format
