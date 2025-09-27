@@ -1,6 +1,6 @@
-* =================================================================
-. * PART B: TABULATION AND DESCRIPTIVE STATISTICS FOR CATEGORICAL VARIABLES
-. * =================================================================
+********************************************************************************
+* PART B: DESCRIPTIVE STATISTICS FOR CATEGORICAL VARIABLES
+********************************************************************************
 . 
 . * Tabulate nonwhite variable
 . tabulate nonwhite
@@ -538,5 +538,3 @@ Summary statistics: mean count
 >     addnote("Proportions and sample sizes shown")
 (output written to C:\repos\ujav-2502-econometrics\Tables/0201-categorical_summary.tex)
 
-. 
-end of do-file

@@ -76,20 +76,20 @@ histogram numdep, frequency discrete ///
     name(hist_numdep, replace)
 
 * Export histograms
-graph export "`figures_dir'/0201-hist_wage.eps", name(hist_wage) replace //For latex
-graph export "`figures_dir'/0201-hist_wage.png", name(hist_wage) replace //For review
-graph export "`figures_dir'/0201-hist_educ.eps", name(hist_educ) replace //For latex
-graph export "`figures_dir'/0201-hist_educ.png", name(hist_educ) replace //For review  
-graph export "`figures_dir'/0201-hist_expr.eps", name(hist_exper) replace // For latex
-graph export "`figures_dir'/0201-hist_expr.png", name(hist_exper) replace // For review
-graph export "`figures_dir'/0201-hist_tenr.eps", name(hist_tenure) replace // For latex
-graph export "`figures_dir'/0201-hist_tenr.png", name(hist_tenure) replace // For review
-graph export "`figures_dir'/0201-hist_numd.eps", name(hist_numdep) replace // For latex
-graph export "`figures_dir'/0201-hist_numd.eps", name(hist_numdep) replace // For review
+graph export "$figures_dir/0201-hist_wage.eps", name(hist_wage) replace //For latex
+graph export "$figures_dir/0201-hist_wage.png", name(hist_wage) replace //For review
+graph export "$figures_dir/0201-hist_educ.eps", name(hist_educ) replace //For latex
+graph export "$figures_dir/0201-hist_educ.png", name(hist_educ) replace //For review  
+graph export "$figures_dir/0201-hist_expr.eps", name(hist_exper) replace // For latex
+graph export "$figures_dir/0201-hist_expr.png", name(hist_exper) replace // For review
+graph export "$figures_dir/0201-hist_tenr.eps", name(hist_tenure) replace // For latex
+graph export "$figures_dir/0201-hist_tenr.png", name(hist_tenure) replace // For review
+graph export "$figures_dir/0201-hist_numd.eps", name(hist_numdep) replace // For latex
+graph export "$figures_dir/0201-hist_numd.eps", name(hist_numdep) replace // For review
 
-* =================================================================
-* PART B: TABULATION AND DESCRIPTIVE STATISTICS FOR CATEGORICAL VARIABLES
-* =================================================================
+********************************************************************************
+* PART B: DESCRIPTIVE STATISTICS FOR CATEGORICAL VARIABLES
+********************************************************************************
 
 * Tabulate nonwhite variable
 tabulate nonwhite
@@ -237,15 +237,6 @@ esttab using "$tables_dir/0201-categorical_summary.tex", replace ///
 * Calculate number of non-white females in the sample
 count if nonwhite == 1 & female == 1
 display "Number of non-white females: " r(N)
-
-* Alternative method using tabulation
-tab nonwhite female, cell
-
-* Store the result
-gen nonwhite_female = (nonwhite == 1 & female == 1)
-sum nonwhite_female
-display "Number of non-white females: " r(sum)
-drop nonwhite_female
 
 ********************************************************************************
 * PART D: COUNT WHITE MARRIED MALES

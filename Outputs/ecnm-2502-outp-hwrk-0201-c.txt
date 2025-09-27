@@ -1,0 +1,10 @@
+********************************************************************************
+* PART C: COUNT NON-WHITE FEMALES
+********************************************************************************
+. 
+. * Calculate number of non-white females in the sample
+. count if nonwhite == 1 & female == 1
+  25
+
+. display "Number of non-white females: " r(N)
+Number of non-white females: 25

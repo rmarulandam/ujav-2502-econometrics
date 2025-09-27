@@ -1,9 +1,85 @@
-********************************************************************************
-. * OUTPUT PART A: DESCRIPTIVE STATISTICS AND HISTOGRAMS
-. ********************************************************************************
+*******************************************************************************
+* OUTPUT PART A: DESCRIPTIVE STATISTICS AND HISTOGRAMS
+*******************************************************************************
 . 
 . * Calculate descriptive statistics for wage, educ, exper, tenure, and numdep
-. *summarize wage educ exper tenure numdep, detail
+. summarize wage educ exper tenure numdep, detail
+
+                   average hourly earnings
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%         1.67            .53
+ 5%         2.75           1.43
+10%         2.92            1.5       Obs                 526
+25%         3.33            1.5       Sum of wgt.         526
+
+50%         4.65                      Mean           5.896103
+                        Largest       Std. dev.      3.693086
+75%         6.88          21.86
+90%           10           22.2       Variance       13.63888
+95%           13          22.86       Skewness       2.007325
+99%           20          24.98       Kurtosis       7.970083
+
+                     years of education
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            4              0
+ 5%            8              0
+10%            9              2       Obs                 526
+25%           12              3       Sum of wgt.         526
+
+50%           12                      Mean           12.56274
+                        Largest       Std. dev.      2.769022
+75%           14             18
+90%           16             18       Variance       7.667485
+95%           17             18       Skewness      -.6195741
+99%           18             18       Kurtosis       4.884245
+
+                 years potential experience
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            1              1
+ 5%            1              1
+10%            2              1       Obs                 526
+25%            5              1       Sum of wgt.         526
+
+50%         13.5                      Mean           17.01711
+                        Largest       Std. dev.      13.57216
+75%           26             49
+90%           38             49       Variance       184.2035
+95%           43             50       Skewness       .7068652
+99%           49             51       Kurtosis       2.357318
+
+                 years with current employer
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                 526
+25%            0              0       Sum of wgt.         526
+
+50%            2                      Mean           5.104563
+                        Largest       Std. dev.      7.224462
+75%            7             33
+90%           15             34       Variance       52.19286
+95%           22             39       Skewness       2.110273
+99%           31             44       Kurtosis       7.658076
+
+                    number of dependents
+-------------------------------------------------------------
+      Percentiles      Smallest
+ 1%            0              0
+ 5%            0              0
+10%            0              0       Obs                 526
+25%            0              0       Sum of wgt.         526
+
+50%            1                      Mean           1.043726
+                        Largest       Std. dev.      1.261891
+75%            2              5
+90%            3              5       Variance        1.59237
+95%            3              6       Skewness        1.16449
+99%            5              6       Kurtosis       3.902175
+
 . estpost summarize wage educ exper tenure numdep
 
              |  e(count)   e(sum_w)    e(mean)     e(Var)      e(sd)     e(min)     e(max)     e(sum) 
@@ -14,7 +90,7 @@
       tenure |       526        526   5.104563   52.19286   7.224462          0         44       2685 
       numdep |       526        526   1.043726    1.59237   1.261891          0          6        549 
 
-. esttab using "`tables_dir'\descriptive_statistics.tex", replace ///
+. esttab using "$tables_dir\descriptive_statistics.tex", replace ///
 >     cells("mean(fmt(2)) sd(fmt(2)) min max count") ///
 >     label booktabs title("Descriptive Statistics")
 (output written to C:\repos\ujav-2502-econometrics\Tables\descriptive_statistics.tex)
@@ -87,32 +163,32 @@
 
 . 
 . * Export histograms
-. graph export "`figures_dir'/0201-hist_wage.eps", name(hist_wage) replace //For latex
+. graph export "$figures_dir/0201-hist_wage.eps", name(hist_wage) replace //For latex
 file C:\repos\ujav-2502-econometrics\Figures/0201-hist_wage.eps saved as EPS format
 
-. graph export "`figures_dir'/0201-hist_wage.png", name(hist_wage) replace //For review
+. graph export "$figures_dir/0201-hist_wage.png", name(hist_wage) replace //For review
 file C:\repos\ujav-2502-econometrics\Figures/0201-hist_wage.png saved as PNG format
 
-. graph export "`figures_dir'/0201-hist_educ.eps", name(hist_educ) replace //For latex
+. graph export "$figures_dir/0201-hist_educ.eps", name(hist_educ) replace //For latex
 file C:\repos\ujav-2502-econometrics\Figures/0201-hist_educ.eps saved as EPS format
 
-. graph export "`figures_dir'/0201-hist_educ.png", name(hist_educ) replace //For review  
+. graph export "$figures_dir/0201-hist_educ.png", name(hist_educ) replace //For review  
 file C:\repos\ujav-2502-econometrics\Figures/0201-hist_educ.png saved as PNG format
 
-. graph export "`figures_dir'/0201-hist_expr.eps", name(hist_exper) replace // For latex
+. graph export "$figures_dir/0201-hist_expr.eps", name(hist_exper) replace // For latex
 file C:\repos\ujav-2502-econometrics\Figures/0201-hist_expr.eps saved as EPS format
 
-. graph export "`figures_dir'/0201-hist_expr.png", name(hist_exper) replace // For review
+. graph export "$figures_dir/0201-hist_expr.png", name(hist_exper) replace // For review
 file C:\repos\ujav-2502-econometrics\Figures/0201-hist_expr.png saved as PNG format
 
-. graph export "`figures_dir'/0201-hist_tenr.eps", name(hist_tenure) replace // For latex
+. graph export "$figures_dir/0201-hist_tenr.eps", name(hist_tenure) replace // For latex
 file C:\repos\ujav-2502-econometrics\Figures/0201-hist_tenr.eps saved as EPS format
 
-. graph export "`figures_dir'/0201-hist_tenr.png", name(hist_tenure) replace // For review
+. graph export "$figures_dir/0201-hist_tenr.png", name(hist_tenure) replace // For review
 file C:\repos\ujav-2502-econometrics\Figures/0201-hist_tenr.png saved as PNG format
 
-. graph export "`figures_dir'/0201-hist_numd.eps", name(hist_numdep) replace // For latex
+. graph export "$figures_dir/0201-hist_numd.eps", name(hist_numdep) replace // For latex
 file C:\repos\ujav-2502-econometrics\Figures/0201-hist_numd.eps saved as EPS format
 
-. graph export "`figures_dir'/0201-hist_numd.eps", name(hist_numdep) replace // For review
+. graph export "$figures_dir/0201-hist_numd.eps", name(hist_numdep) replace // For review
 file C:\repos\ujav-2502-econometrics\Figures/0201-hist_numd.eps saved as EPS format
