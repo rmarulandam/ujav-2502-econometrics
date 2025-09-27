@@ -12,6 +12,11 @@
 \usepackage{graphicx} % Required for inserting images
 \usepackage{enumitem}
 \usepackage{listings}
+\lstset{
+    basicstyle=\scriptsize\ttfamily,
+    breaklines=true,
+    frame=single
+}
 
 \usepackage{xcolor}
 
@@ -24,7 +29,7 @@
 \usepackage[toc]{appendix}
 
 \title{Econometría 2502 - Taller 2}
-\author{Rafael Marulanda, Carlos Puerto y Lorena Toro}
+\author{Rafael Marulanda y Lorena Toro}
 \date{27 de setiembre de 2025}
 
 \begin{document}
@@ -50,6 +55,10 @@ Descargue la base de datos \texttt{wage1}.
 \end{enumerate}
 
 \subsection*{a) Estadísticas Descriptivas}
+
+\subsubsection*{Salida de Stata de la parte a}
+
+\lstinputlisting[label=lst:hwrk-0201-a]{Outputs/ecnm-2502-outp-hwrk-0201-a.txt}
 
 \subsubsection*{Resumen de las Distribuciones de Variables}
 
@@ -130,11 +139,11 @@ El número promedio relativamente bajo de dependientes, junto con la proporción
 
 Estas características distribucionales muestran colectivamente un cuadro de un segmento del mercado laboral caracterizado por niveles de habilidad moderados, dispersión salarial significativa, alta movilidad laboral y estructuras familiares variadas.
 
-\subsubsection*{Salida de Stata de la parte a}
-
-\lstinputlisting[label=lst:hwrk-0201-a]{Outputs/ecnm-2502-outp-hwrk-0201-a.txt}
-
 \subsection*{b) Análisis de variables categóricas}
+
+\subsubsection*{Salida de Stata de la parte b)}
+
+\lstinputlisting[label=lst:hwrk-0201-b]{Outputs/ecnm-2502-outp-hwrk-0201-b.txt}
 
 \subsubsection*{Distribución y Características de las Variables Binarias}
 
@@ -147,46 +156,87 @@ El análisis de las variables categóricas \texttt{nonwhite}, \texttt{female} y 
 
 \subsubsection*{Composición Racial}
 
-La variable \texttt{nonwhite} revela una muestra predominantemente blanca, con solo el 10.27\% (54 trabajadores) identificados como no blancos y el 89.73\% (472 trabajadores) como blancos. Esta distribución refleja la composición racial del mercado laboral estadounidense durante el período de recolección de datos, aunque muestra una subrepresentación de minorías étnicas comparada con los promedios nacionales actuales.
+La variable \texttt{nonwhite} revela una muestra predominantemente blanca, con solo el 10.27\% (54 trabajadores) identificados como no blancos y el 89.73\% (472 trabajadores) como blancos.
 
-La Tabla \ref{tab:0201-descriptives_by_race} presenta diferencias notables en las características económicas por grupo racial. Los trabajadores blancos perciben salarios promedio de \$5.94 por hora, mientras que los no blancos reciben \$5.48, una diferencia de \$0.47 o aproximadamente 8\% menos. Esta brecha salarial persiste a pesar de que los trabajadores no blancos tienen ligeramente más experiencia laboral (17.59 vs 16.95 años). Los trabajadores no blancos presentan menor logro educativo promedio (11.87 vs 12.64 años), equivalente a casi un año menos de escolaridad. Esta diferencia educativa podría explicar parcialmente la disparidad salarial observada, aunque no puede descartarse la presencia de discriminación laboral.
+La Tabla \ref{tab:0201-descriptives_by_race} presenta diferencias en las características económicas por grupo racial. Los trabajadores blancos perciben salarios promedio de \$5.94 por hora, mientras que los no blancos reciben \$5.48, una diferencia de \$0.47 o aproximadamente 8\% menos. Los trabajadores no blancos presentan menor logro educativo promedio (11.87 vs 12.64 años), equivalente a casi un año menos de escolaridad. Esta diferencia educativa podría explicar parcialmente la disparidad salarial observada, aunque no puede descartarse la presencia de discriminación laboral.
+
+\input{Tables/0201-descriptives_by_race.tex}
 
 \subsubsection*{Distribución por Género}
 
-La variable \texttt{female} muestra una distribución relativamente equilibrada con 52.09\% hombres (274 trabajadores) y 47.91\% mujeres (252 trabajadoras). Esta proporción cercana a la paridad sugiere una muestra representativa en términos de participación laboral por género para el período analizado.
+La variable \texttt{female} muestra una distribución algo equilibrada con 52.09\% hombres (274 trabajadores) y 47.91\% mujeres (252 trabajadoras). Esta proporción cercana a la paridad sugiere una muestra representativa en términos de participación laboral por género para el período analizado.
 
-Sin embargo, la Tabla \ref{tab:descriptives_by_gender} revela disparidades económicas sustanciales entre géneros. Los hombres ganan en promedio \$7.10 por hora comparado con \$4.59 para las mujeres, representando una brecha salarial del 54.7\%. Esta diferencia dramática constituye la disparidad más pronunciada entre todas las variables categóricas analizadas. Las mujeres también presentan menor educación promedio (12.32 vs 12.79 años), menor experiencia laboral (16.43 vs 17.56 años), y notablemente menor antigüedad laboral (3.62 vs 6.47 años). La diferencia en antigüedad sugiere mayor rotación laboral femenina, posiblemente relacionada con interrupciones de carrera por responsabilidades familiares o discriminación en retención laboral.
+Sin embargo, la Tabla \ref{tab:0201-descriptives_by_gender} revela disparidades económicas sustanciales entre géneros. Los hombres ganan en promedio \$7.10 por hora comparado con \$4.59 para las mujeres, representando una brecha salarial del 54.7\%. Esta diferencia dramática constituye la disparidad más pronunciada entre todas las variables categóricas analizadas. Las mujeres también presentan menor educación promedio (12.32 vs 12.79 años), menor experiencia laboral (16.43 vs 17.56 años), y notablemente menor antigüedad laboral (3.62 vs 6.47 años). La diferencia en antigüedad sugiere mayor rotación laboral femenina, posiblemente relacionada con interrupciones de carrera por responsabilidades familiares o discriminación en retención laboral.
+
+\input{Tables/0201-descriptives_by_gender.tex}
 
 \subsubsection*{Estado Civil}
 
-La variable \texttt{married} indica que el 60.84\% de la muestra (320 trabajadores) está casada, mientras que el 39.16\% (206 trabajadores) permanece soltera. Esta mayoría de trabajadores casados es consistente con patrones demográficos típicos de la fuerza laboral adulta.
+La variable \texttt{married} indica que el 60.84\% de la muestra (320 trabajadores) está casada, mientras que el 39.16\% (206 trabajadores) permanece soltera.
 
-La Tabla \ref{tab:descriptives_by_marital} revela que los trabajadores casados perciben salarios significativamente superiores (\$6.57 vs \$4.84), una prima matrimonial del 35.7\%. Los casados también exhiben mayor experiencia laboral (20.47 vs 11.66 años) y antigüedad (6.49 vs 2.95 años). Estas diferencias sugieren que el matrimonio puede estar correlacionado con mayor estabilidad laboral y acumulación de capital humano, aunque también podría reflejar efectos de selección donde individuos con mejores perspectivas económicas tienen mayor probabilidad de casarse.
+La Tabla \ref{tab:0201-descriptives_by_marital} revela que los trabajadores casados perciben salarios significativamente superiores (\$6.57 vs \$4.84), una prima matrimonial del 35.7\%. Los casados también exhiben mayor experiencia laboral (20.47 vs 11.66 años) y antigüedad (6.49 vs 2.95 años). Estas diferencias sugieren que el matrimonio puede estar correlacionado con mayor estabilidad laboral y acumulación de capital humano, aunque también podría reflejar efectos de selección donde individuos con mejores perspectivas económicas tienen mayor probabilidad de casarse.
+
+\input{Tables/0201-descriptives_by_marital.tex}
 
 \subsubsection*{Raza y Género}
 
-La distribución por género es notablemente similar entre grupos raciales: 51.91\% de los trabajadores blancos son hombres comparado con 53.70\% entre no blancos. Esta similitud sugiere que no existe segregación ocupacional significativa por género dentro de grupos raciales en esta muestra. Sin embargo, la combinación de ser mujer y no blanca (25 trabajadoras, 4.75\% de la muestra) representa el grupo más vulnerable a discriminación múltiple. Tablas \ref{tab:crosstab_race_gender}
+La distribución por género es similar entre grupos raciales: 51.91\% de los trabajadores blancos son hombres comparado con 53.70\% entre no blancos. Esta similitud sugiere que no existe segregación ocupacional significativa por género dentro de grupos raciales en esta muestra. Tablas \ref{tab:0201-crosstab_race_gender}
+
+\input{Tables/0201-crosstab_race_gender.tex}
 
 \subsubsection*{Raza y Estado Civil}
 
-Los trabajadores blancos muestran mayor tasa de matrimonio (61.86\%) comparado con los no blancos (51.85\%). Esta diferencia de 10 puntos porcentuales podría reflejar factores socioeconómicos que afectan las decisiones matrimoniales, incluyendo estabilidad económica y normas culturales diferenciadas. \ref{tab:crosstab_race_married}
+Como muestra la Tabla \ref{tab:0201-crosstab_race_married} los trabajadores blancos muestran mayor tasa de matrimonio (61.86\%) comparado con los no blancos (51.85\%). Esta diferencia de 10 puntos porcentuales podría reflejar factores socioeconómicos que afectan las decisiones matrimoniales, incluyendo estabilidad económica y normas culturales diferenciadas.
+
+\input{Tables/0201-crosstab_race_married.tex}
 
 \subsubsection*{Género y Estado Civil}
 
-La Tabla \ref{tab:crosstab_gender_married} revela patrones matrimoniales marcadamente diferentes por género. El 68.61\% de los hombres están casados versus solo 52.38\% de las mujeres. Esta disparidad sugiere que las mujeres solteras tienen mayor participación laboral que los hombres solteros, consistente con teorías de especialización familiar donde las mujeres casadas enfrentan mayores barreras para la participación laboral.
-\ref{tab:crosstab_gender_married}
+La Tabla \ref{tab:0201-crosstab_gender_married} revela patrones matrimoniales marcadamente diferentes por género. El 68.61\% de los hombres están casados versus solo 52.38\% de las mujeres. Esta disparidad sugiere que las mujeres solteras tienen mayor participación laboral que los hombres solteros, consistente con teorías de especialización familiar donde las mujeres casadas enfrentan mayores barreras para la participación laboral.
+
+\input{Tables/0201-crosstab_gender_married.tex}
 
 \subsubsection*{Interpretación General}
 
 Los resultados revelan segmentación significativa del mercado laboral según características demográficas. Las brechas salariales observadas—8\% por raza, 54.7\% por género, y 35.7\% por estado civil—sugieren que factores más allá del capital humano influyen en la determinación salarial. La intersección de estas características probablemente amplifica las desventajas: una mujer no blanca soltera enfrenta múltiples penalizaciones salariales acumulativas.
 
-La menor antigüedad laboral de mujeres y trabajadores no blancos indica mayor vulnerabilidad a disrupciones laborales, menor acumulación de capital humano específico a la empresa, y potencialmente menor acceso a promociones internas. Estos patrones sugieren la necesidad de políticas laborales que aborden no solo las brechas salariales directas, sino también las barreras estructurales que impiden la acumulación de experiencia y antigüedad en grupos desfavorecidos.
+La menor antigüedad laboral de mujeres y trabajadores no blancos indica menor acumulación de capital humano específico a la empresa, y potencialmente menor acceso a promociones internas. Estos patrones sugieren la necesidad de políticas laborales que aborden las brechas salariales directas y las barreras estructurales que impiden la acumulación de experiencia y antigüedad en grupos desfavorecidos.
 
 El análisis también sugiere que el matrimonio funciona como un marcador de estabilidad económica y laboral, aunque la causalidad permanece ambigua. Los trabajadores casados podrían recibir primas salariales debido a mayor productividad percibida, discriminación estadística favorable, o simplemente porque individuos económicamente exitosos tienen mayor probabilidad de casarse y permanecer casados.
 
-\subsubsection*{Salida de Stata de la parte b)}
 
-%\lstinputlisting[label=lst:hwrk-0201-b]{Outputs/ecnm-2502-outp-hwrk-0201-b.txt}
+
+\subsection*{c) Número de mujeres no blancas}
+
+El número de mujeres no blancas en la muestra es 25.
+
+\subsubsection*{Salida de Stata de la parte c)}
+
+%\lstinputlisting[label=lst:hwrk-0201-c]{Outputs/ecnm-2502-outp-hwrk-0201-c.txt}
+
+\subsection*{d) Número de hombres blancos y casados}
+
+El número de hombres blancos y casados en la muestra es 168.
+
+\subsubsection*{Salida de Stata de la parte d)}
+
+%\lstinputlisting[label=lst:hwrk-0201-d]{Outputs/ecnm-2502-outp-hwrk-0201-d.txt}
+
+\subsection*{e) Número de mujeres blancas y solteras}
+
+El número de mujeres blancas y solteras en la muestra es 103.
+
+\subsubsection*{Salida de Stata de la parte e)}
+
+%\lstinputlisting[label=lst:hwrk-0201-e]{Outputs/ecnm-2502-outp-hwrk-0201-e.txt}
+
+\subsection*{f) Cálculo de la covarianza y correlación}
+
+Los cálculos de varianza y correlación entre \texttt{wage}, \texttt{educ}, \texttt{exper}, \texttt{tenure} y \texttt{numdep} se resumen en la tabla XX construida con los datos de la salida de Stata de la parte f). 
+
+\subsubsection*{Salida de Stata de la parte f)}
+
+%\lstinputlisting[label=lst:hwrk-0201-f]{Outputs/ecnm-2502-outp-hwrk-0201-f.txt}
 
 \section{Regresión lineal simple: predicción de ventas}
 
@@ -680,21 +730,435 @@ El archivo \texttt{stockton4.dat} contiene datos sobre 15,009 casas vendidas en 
     Basándose en los gráficos y el ajuste visual de las líneas de regresión estimadas, ¿cuál de estos dos modelos preferiría? Explique.
 \end{enumerate}
 
-% --- Appendix ---
-\appendix
-\clearpage
-\section*{\centering \Huge Anexos}
+\subsection*{a) Gráfico del precio de venta de las casas Vs su área habitable}
 
-\section{Código del problema 1}
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.81\textwidth]{Figures/0205-scatter_basic.eps}
+\caption{Precio de venta de las casas vs área habitable}
+\label{fig:0205-scatter_basic}
+\end{figure}
 
-\newpage
+\subsubsection*{Salida de Stata de la parte a)}
 
-\section{Código del problema 4}
+%\lstinputlisting[label=lst:hwrk-0205-a]{Outputs/ecnm-2502-outp-hwrk-0201-a.txt}
 
-\lstinputlisting[label=lst:hwrk0204]{Code/ecnm-2502-hwrk-0204.do}
+\subsection*{b) Modelo de Regresión Lineal de las casas}
+\subsubsection*{Salida de Stata de la parte b)}
 
-\newpage
+\subsubsection*{Ecuación Estimada}
+El modelo de regresión lineal estimado es:
+\[
+\widehat{sprice} = -30,069.2 + 9,181.71 \cdot livarea
+\]
+\begin{align}
+\text{Error estándar:} \quad & (3,211.57) \quad (182.33) \\
+\text{Estadístico t:} \quad & (-9.36) \quad\quad (50.36) \\
+\end{align}
 
-\section{Código del problema 5}
+\subsubsection*{Interpretación de las Estimaciones}
+
+\textbf{Coeficiente de pendiente ($\hat{\beta}_1 = 9,181.71$):}
+\begin{itemize}
+    \item Por cada pie cuadrado adicional de área habitable, el precio de venta aumenta en promedio \$9,181.71, manteniendo todo lo demás constante.
+    \item Este coeficiente es altamente significativo (t = 50.36, p < 0.001), con un intervalo de confianza al 95\% de [\$8,824.07, \$9,539.36].
+    \item La fuerte significancia estadística indica una relación positiva muy robusta entre el área habitable y el precio de venta.
+\end{itemize}
+
+\textbf{Intercepto ($\hat{\beta}_0 = -30,069.2$):}
+\begin{itemize}
+    \item El intercepto negativo sugiere que una casa hipotética con 0 pies cuadrados tendría un precio de -\$30,069.2.
+    \item Este valor no tiene interpretación práctica, pues no existen casas con área cero. El intercepto solo sirve en este caso para ajustar la línea de regresión.
+    \item Es estadísticamente significativo (t = -9.36, p < 0.001).
+\end{itemize}
+
+\subsubsection*{Boceto de la Línea Ajustada}
+
+\subsection*{c) Modelo Cuadrático}
+
+\subsubsection*{Salida de Stata de la parte c)}
+
+\subsubsection*{Ecuación Estimada}
+El modelo cuadrático estimado es:
+\[
+\widehat{sprice} = 57,728.31 + 212.611 \cdot livarea^2
+\]
+\begin{align}
+\text{Error estándar:} \quad & (1,546.67) \quad (3.932) \\
+\text{Estadístico t:} \quad & (37.32) \quad\quad (54.08) \\
+\end{align}
+
+\subsubsection*{Interpretación de las Estimaciones}
+
+\textbf{Coeficiente de $livarea^2$ ($\hat{\beta}_1 = 212.611$):}
+\begin{itemize}
+    \item Este coeficiente indica que el precio aumenta de forma cuadrática con el área habitable.
+    \item Es altamente significativo (t = 54.08, p < 0.001), con un intervalo de confianza al 95\% de [204.90, 220.32].
+    \item El modelo cuadrático implica que el efecto marginal del área habitable sobre el precio no es constante, sino que aumenta con el tamaño de la casa.
+\end{itemize}
+
+\textbf{Intercepto ($\hat{\beta}_0 = 57,728.31$):}
+\begin{itemize}
+    \item Representa el precio predicho cuando el área habitable es cero.
+    \item A diferencia del modelo lineal, este intercepto es positivo (\$57,728.31).
+    \item Es estadísticamente significativo (t = 37.32, p < 0.001).
+\end{itemize}
+
+\subsubsection*{Efecto Marginal en una Casa de 1,500 Pies Cuadrados}
+
+Para calcular el efecto marginal, se deriva la función de precio con respecto al área habitable:
+\[
+\frac{\partial sprice}{\partial livarea} = \frac{\partial}{\partial livarea}(\beta_0 + \beta_1 \cdot livarea^2) = 2\beta_1 \cdot livarea
+\]
+
+Se evalúa en $livarea = 1,500$ pies cuadrados:
+\[
+\frac{\partial sprice}{\partial livarea}\bigg|_{livarea=1,500} = 2 \times 212.611 \times 1,500 = 637,833
+\]
+
+\textbf{Interpretación del efecto marginal:}
+\begin{itemize}
+    \item En una casa con 1,500 pies cuadrados, cada pie cuadrado adicional aumenta el precio en \$637.83.
+    \item Por lo tanto, 100 pies cuadrados adicionales aumentarían el precio en aproximadamente:
+    \[
+    \Delta sprice \approx 637.83 \times 100 = \boxed{\$63,783}
+    \]
+\end{itemize}
+
+\subsection*{d) Comparación Gráfica y Numérica de los Modelos}
+
+\subsubsection*{Gráfico Comparativo de las Líneas Ajustadas}
+
+La Figura \ref{fig:fitted_comparison} muestra la nube de puntos de los precios de venta versus el área habitable, junto con las líneas ajustadas de ambos modelos.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Figures/0205-fitted_comparison.eps}
+    \caption{Precio de Venta vs Área Habitable: Comparación de Modelos Lineal y Cuadrático}
+    \label{fig:fitted_comparison}
+\end{figure}
+
+\subsubsection*{Análisis Visual del Ajuste}
+
+Al examinar el gráfico, se observan las siguientes características:
+
+\begin{enumerate}
+    \item \textbf{Modelo Lineal:} 
+    \begin{itemize}
+        \item Presenta una relación constante entre área habitable y precio.
+        \item La pendiente es uniforme a lo largo de todo el rango de datos.
+        \item Parece subestimar los precios para casas muy pequeñas (menos de 1,000 pies²).
+        \item También subestima los precios para casas muy grandes (más de 3,000 pies²).
+        \item Tiende a sobreestimar los precios en el rango medio (1,500-2,000 pies²).
+    \end{itemize}
+    
+    \item \textbf{Modelo Cuadrático:}
+    \begin{itemize}
+        \item Muestra una relación no lineal, con curvatura convexa.
+        \item El efecto marginal del área habitable aumenta con el tamaño de la casa.
+        \item Se ajusta mejor a la tendencia de los datos en los extremos del rango.
+        \item Captura mejor la aceleración del precio para casas grandes.
+        \item Proporciona un mejor ajuste visual a la nube de puntos.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Comparación de la Suma de Errores al Cuadrado (SSE)}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{Modelo} & \textbf{SSE} & \textbf{Diferencia con Cuadrático} \\
+\hline
+Lineal & $2.227 \times 10^{12}$ & $+1.955 \times 10^{11}$ \\
+Cuadrático & $2.031 \times 10^{12}$ & --- \\
+\hline
+\end{tabular}
+\caption{Comparación de SSE entre modelos}
+\label{tab:sse_comparison}
+\end{table}
+
+\textbf{Análisis de SSE:}
+\begin{itemize}
+    \item El modelo cuadrático tiene menor SSE ($2.031 \times 10^{12}$) que el modelo lineal ($2.227 \times 10^{12}$).
+    \item La diferencia en SSE es de $1.955 \times 10^{11}$ dólares al cuadrado.
+    \item Esta reducción en SSE representa una mejora del $\frac{1.955 \times 10^{11}}{2.227 \times 10^{12}} \times 100 = 8.78\%$ en el ajuste.
+    \item La menor SSE del modelo cuadrático indica que produce errores de predicción más pequeños en promedio.
+\end{itemize}
+
+\subsection*{Conclusiones}
+
+\begin{enumerate}
+    \item \textbf{¿Cuál parece ajustarse mejor a los datos?}
+    
+    El \textbf{modelo cuadrático} parece ajustarse mejor a los datos tanto visual como numéricamente. Visualmente, la línea cuadrática sigue más fielmente la tendencia no lineal de la nube de puntos, especialmente en los extremos del rango de área habitable.
+    
+    \item \textbf{¿Cuál modelo tiene menor SSE?}
+    
+    El \textbf{modelo cuadrático tiene menor SSE} ($2.031 \times 10^{12}$ vs $2.227 \times 10^{12}$), lo que confirma cuantitativamente la impresión visual de un mejor ajuste.
+    
+\end{enumerate}
+
+\subsection*{e) Modelo Cuadrático por Tipo de Lote}
+
+\subsubsection*{Salida de Stata de la parte e)}
+
+\subsubsection*{Distribución de la Muestra}
+
+Antes de analizar los modelos, se debe notar la distribución de los tipos de lotes:
+\begin{itemize}
+    \item \textbf{Lotes grandes} (>0.5 acres): 95 casas (6.33\% de la muestra)
+    \item \textbf{Lotes no grandes} (≤0.5 acres): 1,405 casas (93.67\% de la muestra)
+\end{itemize}
+
+Las casas en lotes grandes tienen características notablemente diferentes:
+\begin{itemize}
+    \item Precio medio: \$249,017 (lotes grandes) vs \$115,220 (lotes no grandes)
+    \item Área habitable media: 2,463 pies² (lotes grandes) vs 1,621 pies² (lotes no grandes)
+\end{itemize}
+
+\subsubsection*{Modelos estimados}
+
+\textbf{1. Modelo para Lotes Grandes (n = 95):}
+\[
+\widehat{sprice} = 113,279.4 + 193.83 \cdot livarea^2
+\]
+\begin{align}
+\text{Error estándar:} \quad & (12,824.6) \quad (14.62) \\
+\text{Estadístico t:} \quad & (8.83) \quad\quad (13.26) \\
+R^2 = 0.654, \quad & RMSE = \$75,251
+\end{align}
+
+\textbf{2. Modelo para Lotes No Grandes (n = 1,405):}
+\[
+\widehat{sprice} = 62,172.4 + 186.86 \cdot livarea^2
+\]
+\begin{align}
+\text{Error estándar:} \quad & (1,503.1) \quad (4.47) \\
+\text{Estadístico t:} \quad & (41.36) \quad (41.83) \\
+R^2 = 0.555, \quad & RMSE = \$30,238
+\end{align}
+
+\subsubsection*{Interpretación de las Estimaciones}
+
+\textbf{Coeficientes de $livarea^2$}
+
+\begin{enumerate}
+    \item \textbf{Lotes grandes ($\hat{\beta}_1 = 193.83$):}
+    \begin{itemize}
+        \item El precio aumenta \$193.83 por cada unidad de área habitable al cuadrado.
+        \item Efecto marginal en 1,500 pies²: \$581.49 por pie² adicional.
+        \item 100 pies² adicionales aumentan el precio en \$58,149.
+    \end{itemize}
+    
+    \item \textbf{Lotes no grandes ($\hat{\beta}_1 = 186.86$):}
+    \begin{itemize}
+        \item El precio aumenta \$186.86 por cada unidad de área habitable al cuadrado.
+        \item Efecto marginal en 1,500 pies²: \$560.58 por pie² adicional.
+        \item 100 pies² adicionales aumentan el precio en \$56,058.
+    \end{itemize}
+\end{enumerate}
+
+\textbf{Interceptos}
+
+\begin{itemize}
+    \item \textbf{Lotes grandes:} \$113,279 - sustancialmente mayor que los lotes no grandes.
+    \item \textbf{Lotes no grandes:} \$62,172 - casi la mitad del intercepto para lotes grandes.
+    \item Esta diferencia de \$51,107 refleja el valor premium de los lotes grandes, independientemente del área habitable.
+\end{itemize}
+
+\subsubsection*{Comparación de Resultados}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{Característica} & \textbf{Lotes Grandes} & \textbf{Lotes No Grandes} \\
+\hline
+Coeficiente $livarea^2$ & 193.83*** & 186.86*** \\
+Error estándar & (14.62) & (4.47) \\
+Intercepto & \$113,279*** & \$62,172*** \\
+Error estándar & (12,825) & (1,503) \\
+\hline
+$R^2$ & 0.654 & 0.555 \\
+RMSE & \$75,251 & \$30,238 \\
+N & 95 & 1,405 \\
+SSE & $5.27 \times 10^{11}$ & $1.28 \times 10^{12}$ \\
+\hline
+Efecto marginal (1,500 pies²) & \$581/pie² & \$561/pie² \\
+Efecto de 100 pies² adicionales & \$58,149 & \$56,058 \\
+\hline
+\end{tabular}
+\caption{Comparación del Modelo Cuadrático por Tipo de Lote}
+\label{tab:lots_comparison}
+\end{table}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Figures/0205-lots_comparison.eps}
+    \caption{Modelo Cuadrático: Comparación entre Lotes Grandes y No Grandes}
+    \label{fig:lots_comparison}
+\end{figure}
+
+\subsection*{Conclusiones}
+
+\begin{enumerate}
+    \item \textbf{Similitudes:}
+    \begin{itemize}
+        \item Ambos modelos muestran una relación cuadrática significativa entre área y precio.
+        \item Los coeficientes de $livarea^2$ son similares (193.83 vs 186.86) y la diferencia no es estadísticamente significativa.
+        \item Ambos tienen buen poder explicativo, aunque el $R^2$ es mayor para lotes grandes.
+    \end{itemize}
+    
+    \item \textbf{Diferencias principales:}
+    \begin{itemize}
+        \item El \textbf{intercepto es 82\% mayor} para lotes grandes (\$113,279 vs \$62,172), reflejando un premium sustancial.
+        \item El \textbf{RMSE es mayor} para lotes grandes (\$75,251 vs \$30,238), indicando mayor variabilidad en precios.
+        \item El \textbf{$R^2$ es mayor} para lotes grandes (0.654 vs 0.555), sugiriendo que el área habitable explica mejor el precio en este segmento.
+    \end{itemize}
+    
+\end{enumerate}
+
+\subsection*{f) Modelos con la Edad de la Casa}
+
+\subsubsection*{Salida de Stata de la parte f)}
+
+\subsubsection*{Análisis Gráfico Inicial}
+
+La Figura \ref{fig:price_age_scatter} muestra la relación entre el precio de venta y la edad de la casa.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Figures/0205-price_age_scatter.eps}
+    \caption{Precio de Venta vs Edad de la Casa}
+    \label{fig:price_age_scatter}
+\end{figure}
+
+\textbf{Observaciones del gráfico de dispersión:}
+\begin{itemize}
+    \item Alta dispersión en los precios para todas las edades.
+    \item Tendencia negativa débil entre edad y precio.
+    \item Gran variabilidad, especialmente para casas nuevas (0-10 años).
+    \item Presencia de valores atípicos en todas las edades.
+\end{itemize}
+
+\subsubsection*{Modelo Lineal}
+
+\[
+\widehat{sprice} = 137,403.6 - 627.16 \cdot age
+\]
+\begin{align}
+\text{Error estándar:} \quad & (3,149.3) \quad (123.6) \\
+\text{Estadístico t:} \quad & (43.63) \quad (-5.08) \\
+\text{p-valor:} \quad & (0.000) \quad (0.000)
+\end{align}
+
+\textbf{Interpretación de Coeficientes}
+
+\begin{itemize}
+    \item \textbf{Intercepto ($\hat{\beta}_0 = 137,403.6$):}
+    \begin{itemize}
+        \item Representa el precio predicho de una casa nueva (edad = 0).
+        \item Una casa nueva tiene un precio esperado de \$137,404.
+        \item Es altamente significativo (t = 43.63, p < 0.001).
+    \end{itemize}
+    
+    \item \textbf{Coeficiente de edad ($\hat{\beta}_1 = -627.16$):}
+    \begin{itemize}
+        \item Por cada año adicional de edad, el precio disminuye en promedio \$627.16.
+        \item Es estadísticamente significativo (t = -5.08, p < 0.001).
+        \item Intervalo de confianza al 95\%: [-869.52, -384.81].
+        \item Una casa de 20 años vale aproximadamente \$12,543 menos que una casa nueva.
+        \item Una casa de 50 años vale aproximadamente \$31,358 menos que una casa nueva.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Modelo Log-Lineal}
+
+\[
+\widehat{\ln(sprice)} = 11.746 - 0.00476 \cdot age
+\]
+\begin{align}
+\text{Error estándar:} \quad & (0.0188) \quad (0.0007) \\
+\text{Estadístico t:} \quad & (623.26) \quad (-6.44) \\
+\text{p-valor:} \quad & (0.000) \quad (0.000)
+\end{align}
+
+\textbf*{Interpretación de Coeficientes}
+
+\begin{itemize}
+    \item \textbf{Intercepto ($\hat{\beta}_0 = 11.746$):}
+    \begin{itemize}
+        \item $\ln(sprice)$ para una casa nueva (edad = 0).
+        \item Implica un precio esperado de $e^{11.746} = \$126,684$ para una casa nueva.
+    \end{itemize}
+    
+    \item \textbf{Coeficiente de edad ($\hat{\beta}_1 = -0.00476$):}
+    \begin{itemize}
+        \item Cada año adicional de edad reduce el precio en aproximadamente \textbf{0.476\%}.
+        \item Es estadísticamente significativo (t = -6.44, p < 0.001).
+        \item La depreciación es proporcional al valor de la casa.
+        \item Una casa de 20 años vale aproximadamente $20 \times 0.476\% = 9.52\%$ menos.
+        \item Una casa de 50 años vale aproximadamente $50 \times 0.476\% = 23.8\%$ menos.
+    \end{itemize}
+\end{itemize}
+
+\subsubsection*{Comparación Visual de los Modelos}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.85\textwidth]{Figures/0205-age_models_comparison.eps}
+    \caption{Comparación de Modelos: Lineal vs Log-lineal}
+    \label{fig:age_models_comparison}
+\end{figure}
+
+\subsubsection*{Comparación Cuantitativa}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\hline
+\textbf{Criterio} & \textbf{Modelo Lineal} & \textbf{Modelo Log-lineal} \\
+\hline
+$R^2$ & 0.0169 & 0.0269 \\
+$R^2$ ajustado & 0.0163 & 0.0263 \\
+RMSE & \$62,735 & 0.3754* \\
+AIC & 37,400 & 1,320 \\
+BIC & 37,400 & 1,330 \\
+\hline
+Depreciación anual & \$627 constante & 0.476\% del valor \\
+Depreciación a 20 años & \$12,543 & 9.52\% del valor \\
+Depreciación a 50 años & \$31,358 & 23.8\% del valor \\
+\hline
+\end{tabular}
+\caption{Comparación de Modelos de Edad. *RMSE del modelo log-lineal está en escala logarítmica}
+\label{tab:age_comparison}
+\end{table}
+
+\subsubsection*{¿Cuál Modelo Preferir?}
+
+Basándose en el análisis gráfico y estadístico, \textbf{preferiría el modelo log-lineal} por las siguientes razones:
+
+\begin{enumerate}
+    
+    \item \textbf{Interpretación económica más realista:}
+    \begin{itemize}
+        \item El modelo log-lineal implica depreciación \textbf{porcentual constante} (0.476\% anual).
+        \item El modelo lineal implica depreciación \textbf{absoluta constante} (\$627 anual).
+        \item La depreciación porcentual es más coherente con la teoría económica: una casa de \$500,000 debería depreciarse más en términos absolutos que una de \$100,000.
+    \end{itemize}
+    
+    \item \textbf{Comportamiento en los extremos:}
+    \begin{itemize}
+        \item El modelo lineal puede predecir precios negativos para casas muy viejas (>219 años).
+        \item El modelo log-lineal siempre predice precios positivos (asintóticamente hacia cero).
+    \end{itemize}
+    
+    \item \textbf{Ajuste visual:}
+    \begin{itemize}
+        \item Aunque ambas líneas son similares en el rango observado, el modelo log-lineal muestra una ligera curvatura que se ajusta mejor a la tendencia de los datos.
+        \item La curvatura convexa del modelo log-lineal captura mejor la mayor dispersión en casas nuevas.
+    \end{itemize}
+\end{enumerate}
 
 \end{document}
