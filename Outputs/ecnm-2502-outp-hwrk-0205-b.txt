@@ -1,0 +1,19 @@
+********************************************************************************
+* PART B: Linear regression model
+********************************************************************************
+
+* Estimate linear model: sprice = β₀ + β₁livarea + u
+regress sprice livarea
+
+* Store results for later comparison
+estimates store linear_model
+
+* Generate predicted values and residuals
+predict sprice_hat_linear, xb replace
+predict residuals_linear, residuals replace
+
+* Calculate Sum of Squared Errors (SSE) for linear model
+gen squared_resid_linear = residuals_linear^2
+quietly sum squared_resid_linear
+scalar SSE_linear = r(sum)
+display "SSE Linear Model: " SSE_linear

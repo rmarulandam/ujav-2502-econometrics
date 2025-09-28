@@ -1,0 +1,22 @@
+********************************************************************************
+. * PART D: COUNT WHITE MARRIED MALES
+. ********************************************************************************
+. 
+. * Calculate number of white married males
+. count if nonwhite == 0 & married == 1 & female == 0
+  168
+
+. display "Number of white married males: " r(N)
+Number of white married males: 168
+
+. 
+. * Cross-check with tabulation
+. tab married if nonwhite == 0 & female == 0
+
+      =1 if |
+    married |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |         77       31.43       31.43
+          1 |        168       68.57      100.00
+------------+-----------------------------------
+      Total |        245      100.00

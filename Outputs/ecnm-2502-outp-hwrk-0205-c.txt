@@ -1,0 +1,23 @@
+********************************************************************************
+* PART C: Quadratic model
+********************************************************************************
+
+* Generate squared living area variable
+gen livarea2 = livarea^2
+label variable livarea2 "Living area squared"
+
+* Estimate quadratic model: sprice = β₀ + β₁livarea² + u
+regress sprice livarea2
+
+* Store results
+estimates store quadratic_model
+
+* Generate predicted values and residuals
+predict sprice_hat_quad, xb replace
+predict residuals_quad, residuals replace
+
+* Calculate SSE for quadratic model
+gen squared_resid_quad = residuals_quad^2
+quietly sum squared_resid_quad
+scalar SSE_quad = r(sum)
+display "SSE Quadratic Model: " SSE_quad

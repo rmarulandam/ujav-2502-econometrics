@@ -1,0 +1,47 @@
+********************************************************************************
+* PART F: Models with house age
+********************************************************************************
+
+* Create scatter plot of price vs age
+scatter sprice age, ///
+    title("Sale Price vs House Age") ///
+    xtitle("Age (years)") ///
+    ytitle("Sale Price ($)") ///
+    msize(tiny) mcolor(navy%30) ///
+    name(price_age_scatter, replace)
+	
+* Export graph
+graph export "$figures_dir/0205-price_age_scatter.eps", name(price_age_scatter) replace
+graph export "$figures_dir/0205-price_age_scatter.png", name(price_age_scatter) replace
+
+* Linear model: sprice = β₀ + β₁*age + u
+regress sprice age
+estimates store linear_age
+
+* Generate predicted values for linear model
+predict sprice_hat_age_lin, xb
+
+* Create log of sale price for log-linear model
+gen ln_sprice = ln(sprice)
+label variable ln_sprice "Natural log of sale price"
+
+* Log-linear model: ln(sprice) = β₀ + β₁*age + u
+regress ln_sprice age
+estimates store loglinear_age
+
+* Generate predicted values for log-linear model
+predict ln_sprice_hat, xb
+gen sprice_hat_age_log = exp(ln_sprice_hat)
+
+* Sort for smooth lines
+sort age
+
+* Graph with both fitted lines
+twoway (scatter sprice age, msize(tiny) mcolor(gray%20)) ///
+       (line sprice_hat_age_lin age, lcolor(blue) lwidth(medium)) ///
+       (line sprice_hat_age_log age, lcolor(red) lwidth(medium) lpattern(dash)), ///
+       legend(order(2 "Linear Model" 3 "Log-linear Model") position(6)) ///
+       title("Price vs Age: Model Comparison") ///
+       xtitle("Age (years)") ///
+       ytitle("Sale Price ($)") ///
+       name(age_models_comparison, replace)

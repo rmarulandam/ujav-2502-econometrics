@@ -246,12 +246,6 @@ display "Number of non-white females: " r(N)
 count if nonwhite == 0 & married == 1 & female == 0
 display "Number of white married males: " r(N)
 
-* Alternative method
-gen white = (nonwhite == 0)
-gen male = (female == 0)
-count if white == 1 & married == 1 & male == 1
-display "Number of white married males: " r(N)
-
 * Cross-check with tabulation
 tab married if nonwhite == 0 & female == 0
 
@@ -261,11 +255,6 @@ tab married if nonwhite == 0 & female == 0
 
 * Calculate number of white single females
 count if nonwhite == 0 & married == 0 & female == 1
-display "Number of white single females: " r(N)
-
-* Alternative method using generated variables
-gen single = (married == 0)
-count if white == 1 & single == 1 & female == 1
 display "Number of white single females: " r(N)
 
 * Cross-check with tabulation
@@ -278,70 +267,7 @@ tab married if nonwhite == 0 & female == 1
 * Correlation matrix for continuous variables
 correlate wage educ exper tenure numdep
 
-* Display correlation matrix with significance levels
-pwcorr wage educ exper tenure numdep, sig
-
 * Covariance matrix
 correlate wage educ exper tenure numdep, covariance
 
-* Store correlation matrix
-matrix C = r(C)
-matrix list C
 
-* Store covariance matrix  
-correlate wage educ exper tenure numdep, covariance
-matrix V = r(C)
-matrix list V
-
-* Create a more detailed correlation analysis with observations
-pwcorr wage educ exper tenure numdep, obs sig star(0.05)
-
-* Pairwise correlations (handling missing values)
-pwcorr wage educ exper tenure numdep, print(0.05)
-
-********************************************************************************
-* ADDITIONAL ANALYSES (OPTIONAL BUT USEFUL)
-********************************************************************************
-
-* Summary statistics by groups
-table female nonwhite married, ///
-    statistic(mean wage educ exper) ///
-    statistic(sd wage educ exper) ///
-    statistic(count wage)
-
-* Check for missing values
-misstable summarize
-
-* Generate summary report
-log using wage1_analysis.log, replace text
-describe
-summarize
-correlate wage educ exper tenure numdep
-tab1 nonwhite female married
-log close
-
-********************************************************************************
-* EXPORT RESULTS (OPTIONAL)
-********************************************************************************
-
-* Export descriptive statistics to Excel
-putexcel set wage1_results.xlsx, replace
-putexcel A1 = "Wage1 Dataset Analysis Results"
-putexcel A3 = "Descriptive Statistics"
-tabstat wage educ exper tenure numdep, ///
-    statistics(count mean sd min max) save
-putexcel A5 = matrix(r(StatTotal))
-
-* Save graphs
-graph export "wage_histograms.png", replace
-
-********************************************************************************
-* END OF DO FILE
-********************************************************************************
-
-* Display final summary
-display "======================="
-display "Analysis Complete"
-display "======================="
-describe, short
-summarize wage educ exper tenure numdep, detail

@@ -1,0 +1,15 @@
+********************************************************************************
+* PART A: Scatter plot of sale price vs living area
+********************************************************************************
+
+* Create scatter plot of sale price against living area for all houses
+scatter sprice livarea, ///
+    title("Sale Price vs Living Area") ///
+    xtitle("Living Area (square feet)") ///
+    ytitle("Sale Price ($)") ///
+    msize(tiny) mcolor(navy%30) ///
+    name(scatter_basic, replace)
+	
+* Export scatter
+graph export "$figures_dir/0205-scatter_basic.eps", name(scatter_basic) replace //For latex
+graph export "$figures_dir/0205-scatter_basic.png", name(scatter_basic) replace //For review

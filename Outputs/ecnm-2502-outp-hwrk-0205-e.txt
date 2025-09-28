@@ -1,0 +1,74 @@
+********************************************************************************
+* PART E: Quadratic model by lot type (large vs non-large lots)
+********************************************************************************
+
+* Check the distribution of lot types
+tab lgelot
+sum lgelot
+
+* Summary statistics by lot type
+bysort lgelot: summarize sprice livarea livarea2
+
+********************************************************************************
+* Regression for LARGE LOTS ONLY (lgelot == 1)
+********************************************************************************
+
+* Estimate quadratic model for large lots
+regress sprice livarea2 if lgelot == 1
+estat ovtest
+
+* Store results for comparison
+estimates store quad_large_lots
+
+* Generate predicted values for large lots
+predict sprice_hat_large if lgelot == 1, xb replace
+predict residuals_large if lgelot == 1, residuals replace
+
+* Calculate SSE for large lots
+gen squared_resid_large = residuals_large^2 if lgelot == 1
+quietly sum squared_resid_large
+scalar SSE_large = r(sum)
+display "SSE Large Lots Model: " SSE_large
+
+********************************************************************************
+* Regression for NON-LARGE LOTS (lgelot == 0)
+********************************************************************************
+
+* Estimate quadratic model for non-large lots
+regress sprice livarea2 if lgelot == 0
+estat ovtest
+
+* Store results for comparison
+estimates store quad_small_lots
+
+* Generate predicted values for non-large lots
+predict sprice_hat_small if lgelot == 0, xb replace
+predict residuals_small if lgelot == 0, residuals replace
+
+* Calculate SSE for non-large lots
+gen squared_resid_small = residuals_small^2 if lgelot == 0
+quietly sum squared_resid_small
+scalar SSE_small = r(sum)
+display "SSE Non-Large Lots Model: " SSE_small
+
+********************************************************************************
+* Create comparison graph with fitted lines for both lot types
+********************************************************************************
+
+* Sort for smooth lines
+sort livarea
+
+* Graph with fitted lines by lot type
+twoway (scatter sprice livarea if lgelot==1, msize(tiny) mcolor(blue%30)) ///
+       (scatter sprice livarea if lgelot==0, msize(tiny) mcolor(red%30)) ///
+       (line sprice_hat_large livarea if lgelot==1, lcolor(blue) lwidth(medium)) ///
+       (line sprice_hat_small livarea if lgelot==0, lcolor(red) lwidth(medium) lpattern(dash)), ///
+       legend(order(3 "Large Lots" 4 "Non-Large Lots") position(6)) ///
+       title("Quadratic Model: Large vs Non-Large Lots") ///
+       xtitle("Living Area (square feet)") ///
+       ytitle("Sale Price ($)") ///
+       name(lots_comparison, replace)
+
+* Export graph
+graph export "$figures_dir/0205-lots_comparison.eps", name(lots_comparison) replace
+graph export "$figures_dir/0205-lots_comparison.png", name(lots_comparison) replace

@@ -1,0 +1,22 @@
+********************************************************************************
+. * PART E: COUNT WHITE SINGLE FEMALES
+. ********************************************************************************
+. 
+. * Calculate number of white single females
+. count if nonwhite == 0 & married == 0 & female == 1
+  103
+
+. display "Number of white single females: " r(N)
+Number of white single females: 103
+
+. 
+. * Cross-check with tabulation
+. tab married if nonwhite == 0 & female == 1
+
+      =1 if |
+    married |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          0 |        103       45.37       45.37
+          1 |        124       54.63      100.00
+------------+-----------------------------------
+      Total |        227      100.00

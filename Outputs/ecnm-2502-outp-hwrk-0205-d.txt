@@ -1,0 +1,28 @@
+********************************************************************************
+* PART D: Graph with fitted lines for both models
+********************************************************************************
+
+* Sort data for smooth fitted lines
+sort livarea
+
+* Create combined graph with scatter plot and both fitted lines
+twoway (scatter sprice livarea, msize(tiny) mcolor(gray%20)) ///
+       (line sprice_hat_linear livarea, lcolor(blue) lwidth(medium) lpattern(solid)) ///
+       (line sprice_hat_quad livarea, lcolor(red) lwidth(medium) lpattern(dash)), ///
+       legend(order(2 "Linear Model" 3 "Quadratic Model") position(6)) ///
+       title("Sale Price vs Living Area: Linear and Quadratic Models") ///
+       xtitle("Living Area (square feet)") ///
+       ytitle("Sale Price ($)") ///
+       name(fitted_comparison, replace)
+
+* Display SSE comparison
+display "===========================================" 
+display "SSE Comparison:"
+display "SSE Linear Model: " SSE_linear
+display "SSE Quadratic Model: " SSE_quad
+display "Difference (Linear - Quadratic): " SSE_linear - SSE_quad
+display "==========================================="
+
+* Export combined graph
+graph export "$figures_dir/0205-fitted_comparison.eps", name(fitted_comparison) replace //For latex
+graph export "$figures_dir/0205-fitted_comparison.png", name(fitted_comparison) replace //For review

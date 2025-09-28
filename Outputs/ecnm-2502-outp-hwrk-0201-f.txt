@@ -1,0 +1,29 @@
+********************************************************************************
+* PART F: COVARIANCE AND CORRELATION ANALYSIS
+********************************************************************************
+. 
+. * Correlation matrix for continuous variables
+. correlate wage educ exper tenure numdep
+(obs=526)
+
+             |     wage     educ    exper   tenure   numdep
+-------------+---------------------------------------------
+        wage |   1.0000
+        educ |   0.4059   1.0000
+       exper |   0.1129  -0.2995   1.0000
+      tenure |   0.3469  -0.0562   0.4993   1.0000
+      numdep |  -0.0538  -0.2153  -0.0563  -0.0270   1.0000
+
+
+. 
+. * Covariance matrix
+. correlate wage educ exper tenure numdep, covariance
+(obs=526)
+
+             |     wage     educ    exper   tenure   numdep
+-------------+---------------------------------------------
+        wage |  13.6389
+        educ |  4.15086  7.66749
+       exper |  5.65908 -11.2573  184.204
+      tenure |  9.25521 -1.12372  48.9563  52.1929
+      numdep | -.250534 -.752272 -.964559 -.246486  1.59237
