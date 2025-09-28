@@ -212,7 +212,7 @@ El número de mujeres no blancas en la muestra es 25.
 
 \subsubsection*{Salida de Stata de la parte c)}
 
-%\lstinputlisting[label=lst:hwrk-0201-c]{Outputs/ecnm-2502-outp-hwrk-0201-c.txt}
+\lstinputlisting[label=lst:hwrk-0201-c]{Outputs/ecnm-2502-outp-hwrk-0201-c.txt}
 
 \subsection*{d) Número de hombres blancos y casados}
 
@@ -220,7 +220,7 @@ El número de hombres blancos y casados en la muestra es 168.
 
 \subsubsection*{Salida de Stata de la parte d)}
 
-%\lstinputlisting[label=lst:hwrk-0201-d]{Outputs/ecnm-2502-outp-hwrk-0201-d.txt}
+\lstinputlisting[label=lst:hwrk-0201-d]{Outputs/ecnm-2502-outp-hwrk-0201-d.txt}
 
 \subsection*{e) Número de mujeres blancas y solteras}
 
@@ -228,15 +228,49 @@ El número de mujeres blancas y solteras en la muestra es 103.
 
 \subsubsection*{Salida de Stata de la parte e)}
 
-%\lstinputlisting[label=lst:hwrk-0201-e]{Outputs/ecnm-2502-outp-hwrk-0201-e.txt}
+\lstinputlisting[label=lst:hwrk-0201-e]{Outputs/ecnm-2502-outp-hwrk-0201-e.txt}
 
 \subsection*{f) Cálculo de la covarianza y correlación}
 
-Los cálculos de varianza y correlación entre \texttt{wage}, \texttt{educ}, \texttt{exper}, \texttt{tenure} y \texttt{numdep} se resumen en la tabla XX construida con los datos de la salida de Stata de la parte f). 
-
 \subsubsection*{Salida de Stata de la parte f)}
 
-%\lstinputlisting[label=lst:hwrk-0201-f]{Outputs/ecnm-2502-outp-hwrk-0201-f.txt}
+\lstinputlisting[label=lst:hwrk-0201-e]{Outputs/ecnm-2502-outp-hwrk-0201-f.txt}
+
+Los cálculos de varianza y correlación entre \texttt{wage}, \texttt{educ}, \texttt{exper}, \texttt{tenure} y \texttt{numdep} se muestran en las tablas \ref{tab:correlation_matrix} y \ref{tab:covariance_matrix} construidas con los datos de la salida de Stata de la parte f).
+
+\begin{table}[h!]
+\centering
+\caption{Matriz de Correlación}
+\label{tab:correlation_matrix}
+\begin{tabular}{lccccc}
+\toprule
+ & Wage & Educ & Exper & Tenure & Numdep \\
+\midrule
+Wage & 1.000 & & & & \\
+Educ & 0.406 & 1.000 & & & \\
+Exper & 0.113 & -0.300 & 1.000 & & \\
+Tenure & 0.347 & -0.056 & 0.499 & 1.000 & \\
+Numdep & -0.054 & -0.215 & -0.056 & -0.027 & 1.000 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[h!]
+\centering
+\caption{Matriz de Covarianza}
+\label{tab:covariance_matrix}
+\begin{tabular}{lccccc}
+\toprule
+ & Wage & Educ & Exper & Tenure & Numdep \\
+\midrule
+Wage & 13.639 & & & & \\
+Educ & 4.151 & 7.667 & & & \\
+Exper & 5.659 & -11.257 & 184.204 & & \\
+Tenure & 9.255 & -1.124 & 48.956 & 52.193 & \\
+Numdep & -0.251 & -0.752 & -0.965 & -0.246 & 1.592 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \section{Regresión lineal simple: predicción de ventas}
 
@@ -612,6 +646,10 @@ El modelo es una regresión lineal simple porque muestra una relación en línea
 
 \subsection*{b) Estimación de los rendimientos en exceso y análisis de betas bajo el CAPM}
 
+\subsubsection*{Salida de Stata de la parte b)}
+
+\lstinputlisting[label=lst:hwrk-0204-b]{Outputs/ecnm-2502-outp-hwrk-0204-b.txt}
+
 \begin{itemize}
   \item \textbf{Estimación del modelo CAPM y comentarios sobre los valores $\beta$:} \\
   Se estimó el modelo general
@@ -695,6 +733,37 @@ Los modelos por empresa serían:
   La empresa más defensiva es \textbf{Exxon-Mobil}, con un $\hat\beta \approx 0.41$, lo que refleja un perfil más estable.
 \end{itemize}
 
+\subsection*{c) Estimación del modelo CAPM con restricción $\alpha_j = 0$}
+
+\subsubsection*{Salida de Stata de la parte c)}
+
+\lstinputlisting[label=lst:hwrk-0204-c]{Outputs/ecnm-2502-outp-hwrk-0204-c.txt}
+
+Se estimó el modelo CAPM restringido, forzando el intercepto a cero ($\alpha_j = 0$), lo cual implica que no hay rendimientos anormales y el modelo pasa por el origen. Los resultados se muestran en la Tabla~\ref{tab:capm_comparison}.
+
+\begin{table}[h!]
+\centering
+\caption{Comparación de valores $\beta$: Modelo sin restricción vs. con restricción $\alpha = 0$}
+\label{tab:capm_comparison}
+\begin{tabular}{lccc}
+\hline
+\textbf{Empresa} & \textbf{$\hat{\beta}$ sin restricción} & \textbf{$\hat{\beta}$ con $\alpha = 0$} & \textbf{Cambio} \\
+\hline
+Microsoft (MSFT)      & 1.3231 & 1.3185 & -0.0046 \\
+General Electric (GE) & 0.9027 & 0.8993 & -0.0034 \\
+General Motors (GM)   & 1.2583 & 1.2622 & +0.0039 \\
+IBM                   & 1.1864 & 1.1878 & +0.0014 \\
+Disney (DIS)          & 0.9015 & 0.8979 & -0.0036 \\
+Exxon-Mobil (XOM)     & 0.4098 & 0.4134 & +0.0036 \\
+\hline
+\end{tabular}
+\end{table}
+
+\textbf{¿Cambian mucho los valores estimados de los betas?}
+
+Los cambios en los valores de beta al imponer la restricción $\alpha = 0$ son mínimos. Las diferencias oscilan entre -0.0046 y +0.0039, lo que representa cambios porcentuales menores al 1\% en todos los casos.
+
+En conclusión, los valores de beta prácticamente no cambian al imponer la restricción, lo que valida la consistencia del modelo CAPM en esta muestra.
 
 \section{Modelos de Regresión para Precios de Vivienda}
 
@@ -741,10 +810,12 @@ El archivo \texttt{stockton4.dat} contiene datos sobre 15,009 casas vendidas en 
 
 \subsubsection*{Salida de Stata de la parte a)}
 
-%\lstinputlisting[label=lst:hwrk-0205-a]{Outputs/ecnm-2502-outp-hwrk-0201-a.txt}
+\lstinputlisting[label=lst:hwrk-0205-a]{Outputs/ecnm-2502-outp-hwrk-0205-a.txt}
 
 \subsection*{b) Modelo de Regresión Lineal de las casas}
 \subsubsection*{Salida de Stata de la parte b)}
+
+\lstinputlisting[label=lst:hwrk-0205-a]{Outputs/ecnm-2502-outp-hwrk-0205-b.txt}
 
 \subsubsection*{Ecuación Estimada}
 El modelo de regresión lineal estimado es:
@@ -761,7 +832,7 @@ El modelo de regresión lineal estimado es:
 \textbf{Coeficiente de pendiente ($\hat{\beta}_1 = 9,181.71$):}
 \begin{itemize}
     \item Por cada pie cuadrado adicional de área habitable, el precio de venta aumenta en promedio \$9,181.71, manteniendo todo lo demás constante.
-    \item Este coeficiente es altamente significativo (t = 50.36, p < 0.001), con un intervalo de confianza al 95\% de [\$8,824.07, \$9,539.36].
+    
     \item La fuerte significancia estadística indica una relación positiva muy robusta entre el área habitable y el precio de venta.
 \end{itemize}
 
@@ -778,6 +849,8 @@ El modelo de regresión lineal estimado es:
 
 \subsubsection*{Salida de Stata de la parte c)}
 
+\lstinputlisting[label=lst:hwrk-0205-a]{Outputs/ecnm-2502-outp-hwrk-0205-c.txt}
+
 \subsubsection*{Ecuación Estimada}
 El modelo cuadrático estimado es:
 \[
@@ -793,7 +866,7 @@ El modelo cuadrático estimado es:
 \textbf{Coeficiente de $livarea^2$ ($\hat{\beta}_1 = 212.611$):}
 \begin{itemize}
     \item Este coeficiente indica que el precio aumenta de forma cuadrática con el área habitable.
-    \item Es altamente significativo (t = 54.08, p < 0.001), con un intervalo de confianza al 95\% de [204.90, 220.32].
+   
     \item El modelo cuadrático implica que el efecto marginal del área habitable sobre el precio no es constante, sino que aumenta con el tamaño de la casa.
 \end{itemize}
 
@@ -826,6 +899,10 @@ Se evalúa en $livarea = 1,500$ pies cuadrados:
 \end{itemize}
 
 \subsection*{d) Comparación Gráfica y Numérica de los Modelos}
+
+\subsubsection*{Salida de Stata de la parte d)}
+
+\lstinputlisting[label=lst:hwrk-0205-a]{Outputs/ecnm-2502-outp-hwrk-0205-d.txt}
 
 \subsubsection*{Gráfico Comparativo de las Líneas Ajustadas}
 
@@ -891,7 +968,8 @@ Cuadrático & $2.031 \times 10^{12}$ & --- \\
 \begin{enumerate}
     \item \textbf{¿Cuál parece ajustarse mejor a los datos?}
     
-    El \textbf{modelo cuadrático} parece ajustarse mejor a los datos tanto visual como numéricamente. Visualmente, la línea cuadrática sigue más fielmente la tendencia no lineal de la nube de puntos, especialmente en los extremos del rango de área habitable.
+    El \textbf{modelo cuadrático} parece ajustarse mejor a los datos tanto visual como numéricamente. Visualmente, la línea cuadrática sigue más fielmente la tendencia no lineal de la nube de puntos. 
+    El modelo cuadrático es menor que el modelo lineal, ya que el valor de F (25.97) en el cuadrático es mucho menor que 76.61 en el lineal, lo cual nos indica que la especificación del cuadrático es menos problemática que la del lineal.
     
     \item \textbf{¿Cuál modelo tiene menor SSE?}
     
@@ -903,11 +981,15 @@ Cuadrático & $2.031 \times 10^{12}$ & --- \\
 
 \subsubsection*{Salida de Stata de la parte e)}
 
+\subsubsection*{Salida de Stata de la parte e)}
+
+\lstinputlisting[label=lst:hwrk-0205-a]{Outputs/ecnm-2502-outp-hwrk-0205-e.txt}
+
 \subsubsection*{Distribución de la Muestra}
 
 Antes de analizar los modelos, se debe notar la distribución de los tipos de lotes:
 \begin{itemize}
-    \item \textbf{Lotes grandes} (>0.5 acres): 95 casas (6.33\% de la muestra)
+    \item \textbf{Lotes grandes} (0.5 acres): 95 casas (6.33\% de la muestra)
     \item \textbf{Lotes no grandes} (≤0.5 acres): 1,405 casas (93.67\% de la muestra)
 \end{itemize}
 
@@ -923,21 +1005,11 @@ Las casas en lotes grandes tienen características notablemente diferentes:
 \[
 \widehat{sprice} = 113,279.4 + 193.83 \cdot livarea^2
 \]
-\begin{align}
-\text{Error estándar:} \quad & (12,824.6) \quad (14.62) \\
-\text{Estadístico t:} \quad & (8.83) \quad\quad (13.26) \\
-R^2 = 0.654, \quad & RMSE = \$75,251
-\end{align}
 
 \textbf{2. Modelo para Lotes No Grandes (n = 1,405):}
 \[
 \widehat{sprice} = 62,172.4 + 186.86 \cdot livarea^2
 \]
-\begin{align}
-\text{Error estándar:} \quad & (1,503.1) \quad (4.47) \\
-\text{Estadístico t:} \quad & (41.36) \quad (41.83) \\
-R^2 = 0.555, \quad & RMSE = \$30,238
-\end{align}
 
 \subsubsection*{Interpretación de las Estimaciones}
 
@@ -1007,14 +1079,14 @@ Efecto de 100 pies² adicionales & \$58,149 & \$56,058 \\
     \begin{itemize}
         \item Ambos modelos muestran una relación cuadrática significativa entre área y precio.
         \item Los coeficientes de $livarea^2$ son similares (193.83 vs 186.86) y la diferencia no es estadísticamente significativa.
-        \item Ambos tienen buen poder explicativo, aunque el $R^2$ es mayor para lotes grandes.
+       
     \end{itemize}
     
     \item \textbf{Diferencias principales:}
     \begin{itemize}
         \item El \textbf{intercepto es 82\% mayor} para lotes grandes (\$113,279 vs \$62,172), reflejando un premium sustancial.
-        \item El \textbf{RMSE es mayor} para lotes grandes (\$75,251 vs \$30,238), indicando mayor variabilidad en precios.
-        \item El \textbf{$R^2$ es mayor} para lotes grandes (0.654 vs 0.555), sugiriendo que el área habitable explica mejor el precio en este segmento.
+       
+       
     \end{itemize}
     
 \end{enumerate}
@@ -1022,6 +1094,10 @@ Efecto de 100 pies² adicionales & \$58,149 & \$56,058 \\
 \subsection*{f) Modelos con la Edad de la Casa}
 
 \subsubsection*{Salida de Stata de la parte f)}
+
+\subsubsection*{Salida de Stata de la parte f)}
+
+\lstinputlisting[label=lst:hwrk-0205-a]{Outputs/ecnm-2502-outp-hwrk-0205-f.txt}
 
 \subsubsection*{Análisis Gráfico Inicial}
 
