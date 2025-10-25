@@ -1,5 +1,5 @@
 ********************************************************************************
-* wage2
+* sleep75
 ********************************************************************************
 
 * --- 1. SETUP ---
@@ -16,33 +16,31 @@ cd "$project_root"
 
 * --- 2. LOAD AND PREPARE DATA ---
 
-bcuse wage2
+bcuse sleep75
 
 * Display basic information about the dataset
-
 describe
 summarize
 set pformat %5.4f
 
 ********************************************************************************
-* PART A
+* PART A: Men and women
 ********************************************************************************
-regress lwage educ exper tenure married black south urban
 
-********************************************************************************
-* PART B
-********************************************************************************
-gen exper2 = exper^2
-gen tenure2 = tenure^2
-regress lwage educ exper exper2 tenure tenure2 married black south urban
-test exper2 tenure2
+regress sleep totwrk educ age agesq yngkid if male==1
 
-// Part c
-gen black_educ = black * educ
-regress lwage educ exper tenure married black south urban black_educ
-test black_educ
+regress sleep totwrk educ age agesq yngkid if male==0
 
-// Part d
-gen married_black = married * black
-regress lwage educ exper tenure married black married_black south urban
-lincom black + married_black
+// Part c: Chow test with interactions
+gen male_totwrk = male * totwrk
+gen male_educ = male * educ
+gen male_age = male * age
+gen male_agesq = male * agesq
+gen male_yngkid = male * yngkid
+
+regress sleep totwrk educ age agesq yngkid male male_totwrk male_educ male_age male_agesq male_yngkid
+
+test male male_totwrk male_educ male_age male_agesq male_yngkid
+
+// Part d: Test slope interactions
+test male_totwrk male_educ male_age male_agesq male_yngkid
